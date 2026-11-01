@@ -1,6 +1,6 @@
 // =========================================================================
 // PARTE 2 DE 4: dados-cronograma.js
-// Dicionário de URLs Oficiais, Códigos Gran Cursos e Cronograma (Semanas 1 a 13)
+// Cronograma TJPB 2026 — Início: 02 de Novembro de 2026
 // =========================================================================
 
 export const GRAN_COURSE_URLS = {
@@ -12,251 +12,214 @@ export const GRAN_COURSE_URLS = {
   "212094": "https://www.grancursosonline.com.br/cursos/por-concurso/tj-pb-tribunal-de-justica-do-estado-da-paraiba-analista-judiciario-especialidade-ti-ciencia-e-analise-de-dados-pos-edital",
   "207803": "https://www.grancursosonline.com.br/cursos/por-concurso/dataprev-empresa-de-tecnologia-e-informacoes-da-previdencia-social-analista-de-tecnologia-da-informacao-1perfil-3-desenvolvimento-de-software-pos-edital",
   "207802": "https://www.grancursosonline.com.br/cursos/por-concurso/dataprev-empresa-de-tecnologia-e-informacoes-da-previdencia-social-analista-de-tecnologia-da-informacao-1perfil-2-arquitetura-engenharia-e-sustentacao-tecnologica-pos-edital",
-  "207807": "https://www.grancursosonline.com.br/cursos/por-concurso/dataprev-empresa-de-tecnologia-e-informacoes-da-previdencia-social-analista-de-tecnologia-da-informacao-perfil-11-administracao-e-governanca",
-  "207800": "https://www.grancursosonline.com.br/cursos/por-concurso/dataprev-empresa-de-tecnologia-e-informacoes-da-previdencia-social-analista-de-tecnologia-da-informacao-perfil-1-analise-de-negocio-de-ti-pos-edital",
   "198499": "https://www.grancursosonline.com.br/cursos/por-concurso/tj-rj-tribunal-de-justica-do-estado-do-rio-de-janeiro-conhecimentos-especificos-para-analista-judiciario-grupo-tecnologia-da-informacao-analista-de-sistemas-pos-edital",
-  "210869": "https://www.grancursosonline.com.br/cursos/por-concurso/mpu-ministerio-publico-da-uniao-cargo-a06-1analista-do-mpu-desenvolvimento-de-sistemas",
   "211798": "https://www.grancursosonline.com.br/cursos/por-concurso/cgu-controladoria-geral-da-uniao-cargo-4-auditor-federal-de-financas-e-controle-affc-especialidade-tecnologia-da-informacao-desenvolvimento-de-sistemas-pos-edital",
-  "211797": "https://www.grancursosonline.com.br/cursos/por-concurso/cgu-controladoria-geral-da-uniao-auditor-federal-de-financas-e-controle-1tecnologia-da-informacao-infraestrutura-de-ti",
-  "211795": "https://www.grancursosonline.com.br/cursos/por-concurso/cgu-controladoria-geral-da-uniao-cargo-2-auditor-federal-de-financas-e-controle-affc-1especialidade-tecnologia-da-informacao-ciencia-de-dados-pos-edital",
   "210973": "https://www.grancursosonline.com.br/cursos/por-concurso/dpe-pb-defensoria-publica-do-estado-da-paraiba-analista-da-defensoria-desenvolvimento-de-sistemas-pos-edital",
   "212301": "https://www.grancursosonline.com.br/cursos/por-concurso/trf-3-regiao-sp-ms-tribunal-regional-federal-da-3-regiao-tecnico-judiciario-area-apoio-especializado-especialidade-desenvolvimento-de-sistemas-de-informacao-pos-edital",
-  "212300": "https://www.grancursosonline.com.br/cursos/por-concurso/trf-3-regiao-sp-ms-tribunal-regional-federal-da-3-regiao-analista-judiciario-area-apoio-especializado-especialidade-asuporte-em-tecnologia-da-informacao-pos-edital",
   "212295": "https://www.grancursosonline.com.br/cursos/por-concurso/dpdf-defensoria-publica-do-distrito-federal-cargo-4-analista-de-apoio-a-assistencia-judiciaria-area-informatica-desenvolvimento-de-sistemas-pos-edital",
   "198053": "https://www.grancursosonline.com.br/cursos/por-concurso/tcu-tribunal-de-contas-da-uniao-auditor-federal-de-controle-externo-tecnologia-da-informacao",
   "210948": "https://www.grancursosonline.com.br/cursos/por-materia/carreira-de-ti-para-concursos-1gestao-agil-de-projetos-professor-darlan-venturelli",
   "194432": "https://www.grancursosonline.com.br/cursos/por-materia/raciocinio-logico-para-concursos-professor-marcelo-leite",
   "202271": "https://www.grancursosonline.com.br/cursos/por-materia/raciocinio-logico-para-concursos-1professor-sergio-carvalho",
-  "180207": "https://www.grancursosonline.com.br/cursos/por-materia/raciocinio-logico-para-concursos-professor-andre-arruda",
-  "TJPB_BD": "https://www.grancursosonline.com.br/cursos/por-concurso/tj-pb-tribunal-de-justica-do-estado-da-paraiba-analista-judiciario-especialidade-ti-banco-de-dados-pos-edital",
-  "TJPB_INFRA": "https://www.grancursosonline.com.br/cursos/por-concurso/tj-pb-tribunal-de-justica-do-estado-da-paraiba-analista-judiciario-1especialidade-ti-infraestrutura-de-ti-pos-edital",
-  "PORT_FGV_MW": "https://www.grancursosonline.com.br/cursos/por-materia/lingua-portuguesa-intensiva-para-fgv-professor-marcio-wesley",
-  "PORT_FGV_LC": "https://www.grancursosonline.com.br/cursos/por-materia/lingua-portuguesa-para-concurso-fgv-em-exercicios-professora-ludimilla-costa",
-  "REDES_EM": "https://www.grancursosonline.com.br/cursos/por-materia/redes-de-computadores-para-concursos-professor-edward-melo",
-  "MPU_A32": "https://www.grancursosonline.com.br/cursos/por-concurso/mpu-ministerio-publico-da-uniao-cargo-a32-1analista-do-mpu-suporte-e-infraestrutura",
-  "DPDF_BD": "https://www.grancursosonline.com.br/cursos/por-concurso/dpdf-defensoria-publica-do-distrito-federal-cargo-3-analista-de-apoio-a-assistencia-judiciaria-area-informatica-1banco-de-dados-pos-edital",
-  "PROCERGS": "https://www.grancursosonline.com.br/cursos/por-concurso/procergs-centro-de-tecnologia-da-informacao-e-comunicacao-do-estado-do-rio-grande-do-sul-conhecimentos-especificos-para-anc-analista-em-computacao-enfase-em-analise-de-sistemas-gerencia-de-projetos-de-ti",
-  "SEPLAN_AP": "https://www.grancursosonline.com.br/cursos/por-concurso/seplan-ap-secretaria-de-administracao-do-estado-do-amapa-conhecimentos-especificos-para-o-cargo-de-analista-de-tecnologia-da-informacao-pos-edital",
-  "MP_ES": "https://www.grancursosonline.com.br/cursos/por-concurso/mp-es-ministerio-publico-do-estado-do-espirito-santo-conhecimentos-especificos-para-analista-de-sistemas",
-  "BRDE": "https://www.grancursosonline.com.br/cursos/por-concurso/brde-banco-regional-de-desenvolvimento-do-extremo-sul-conhecimentos-especificos-para-o-cargo-analista-de-sistemas-administracao-de-banco-de-dados-pos-edital",
-  "PJE_FS": "https://www.grancursosonline.com.br/cursos/por-materia/provimento-judicial-aplicado-ao-pje-para-concursos-publicos-professor-francion-santos"
+  "180207": "https://www.grancursosonline.com.br/cursos/por-materia/raciocinio-logico-para-concursos-professor-andre-arruda"
 };
 
 export const GRAN_CODES = [
-  { code: "212091", name: "TJ PB - Analista Judiciário - TI: Desenvolvimento de Sistemas (Pós-Edital)", focus: "FGV (Curso Base - 398h)", role: "Painel principal: já tem Gramática, RLM base, Nuvem (13 aulas), Docker/K8s (8 aulas), ISO 27001, SOA/Microsserviços e linguagens." },
-  { code: "212132", name: "TJ PB - Conhecimentos Gerais para Todos os Cargos de Analista - TI", focus: "FGV (TJPB)", role: "Repositório espelho para Língua Portuguesa, RLM e Fundamentos de TI." },
-  { code: "212088", name: "TJ PB - Analista Judiciário - TI: Gestão de Governança de TI", focus: "FGV (TJPB)", role: "Já contém as aulas gravadas das Resoluções CNJ (468/2022, 370/2021, MoReq-Jus 522/2023), COBIT 2019 e ITIL 4 (Darlan Venturelli)." },
-  { code: "212093", name: "TJ PB - Analista Judiciário - TI: Inteligência Artificial", focus: "FGV (TJPB)", role: "Possui Interpretação FGV (Tereza Cavalcanti c/ provas 2026), Pontuação/Regência, Estatística e Busca Vetorial / LLMs / RAG." },
-  { code: "212092", name: "TJ PB - Analista Judiciário - TI: Segurança da Informação", focus: "FGV (TJPB)", role: "Contém as 25 aulas de Redação Oficial (Márcio Wesley), Ortografia/Concordância, ENSEC-PJ (Res. 396/2021), GitOps e Segurança K8s." },
-  { code: "212094", name: "TJ PB - Analista Judiciário - TI: Ciência e Análise de Dados", focus: "FGV (TJPB)", role: "Excelente para Governança de Dados (DAMA-DMBOK), BI, ETL/DW, SQL e Português FGV." },
-  { code: "207803", name: "DATAPREV - Analista de TI - Perfil 3: Desenvolvimento de Software", focus: "FGV (2026 - 497h)", role: "Foco 100% FGV: Java EE/Jakarta, Spring Boot, Hibernate/JPA, Mobile (Android/iOS/Flutter), React/Angular, SAST/DAST e Git." },
-  { code: "207802", name: "DATAPREV - Analista de TI - Perfil 2: Arquitetura e Sustentação", focus: "FGV (2026 - 512h)", role: "Arquitetura de Computadores, Servidores de Aplicação, Contêineres, Nuvem e Sustentação no padrão FGV." },
-  { code: "207807", name: "DATAPREV - Analista de TI - Perfil 11: Administração e Governança", focus: "FGV (2026)", role: "545 videoaulas cobrindo Governança de TI, Planejamento, Contratações e todos os tópicos de Português FGV." },
-  { code: "198499", name: "TJ RJ - Analista Judiciário - TI: Analista de Sistemas", focus: "FGV (Tribunal - 321h)", role: "Engenharia de Software completa (39 aulas de Washington Almeida), Padrões GoF (13 aulas de Júlio Leitão), Hardware e Nuvem." },
-  { code: "210869", name: "MPU - Cargo A06: Analista do MPU - Desenvolvimento de Sistemas", focus: "FGV (2025/2026 - 602h)", role: "Cobre o edital FGV do MPU para Desenvolvimento de Sistemas (excelente para PDFs e videoaulas de programação, ágil e BD)." },
-  { code: "211798", name: "CGU - Cargo 4: Auditor Federal (AFFC) - TI: Desenvolvimento de Sistemas", focus: "Alta Complexidade (311h)", role: "Supre lacunas críticas: Clean Architecture, DDD (Ana Júlia), Query Tuning, Busca Vetorial, RAG, Segurança em IA e Spring avançado." },
-  { code: "210973", name: "DPE PB - Analista da Defensoria - Desenvolvimento de Sistemas", focus: "Paraíba (2026)", role: "Supre System Design (API Gateway, Circuit Breaker, Retries), POO/SOLID, Observabilidade (Zabbix/Prometheus/Grafana/ELK) e SAST." },
-  { code: "212301", name: "TRF 3ª Região - Técnico Judiciário - Desenvolvimento de Sistemas", focus: "Tribunal (2026)", role: "Supre a lacuna declarada de PJe (Desenvolvimento no PJe - Darlan Venturelli), além de Kafka, RabbitMQ, Redis, WCAG e LGPD." },
-  { code: "212295", name: "DPDF - Cargo 4: Analista - Informática: Desenvolvimento de Sistemas", focus: "Defensoria (2026)", role: "Aulas recém-gravadas de Desenvolvimento Seguro - OWASP Top 10 (Cleirton Monte), mais Redis no Cargo 3." },
-  { code: "210948", name: "Carreira de TI para Concursos - Gestão Ágil de Projetos", focus: "Curso Isolado TI (13h)", role: "Supre a lacuna declarada de Práticas Ágeis em Escala - SAFe (Aula 1 - Prof. Darlan Venturelli) e Scrum/Kanban." }
+  { code: "212091", name: "TJ PB - Analista Judiciário - TI: Desenvolvimento de Sistemas (Pós-Edital)", focus: "FGV (Curso Base - 398h)", role: "Painel principal: Gramática, RLM base, Nuvem, Docker/K8s, ISO 27001 e SOA." },
+  { code: "212088", name: "TJ PB - Analista Judiciário - TI: Gestão de Governança de TI", focus: "FGV (TJPB)", role: "Resoluções CNJ (468/2022, 370/2021), COBIT 2019 e ITIL 4 (Darlan Venturelli)." },
+  { code: "212093", name: "TJ PB - Analista Judiciário - TI: Inteligência Artificial", focus: "FGV (TJPB)", role: "Interpretação FGV, Estatística, LLMs, RAG e Busca Vetorial." },
+  { code: "212092", name: "TJ PB - Analista Judiciário - TI: Segurança da Informação", focus: "FGV (TJPB)", role: "Redação Oficial (Márcio Wesley), ENSEC-PJ (Res. 396/2021) e GitOps." },
+  { code: "207803", name: "DATAPREV - Analista de TI - Perfil 3: Desenvolvimento de Software", focus: "FGV (2026 - 497h)", role: "Java EE/Jakarta, Spring Boot, JPA, Mobile e React/Angular." },
+  { code: "198499", name: "TJ RJ - Analista Judiciário - TI: Analista de Sistemas", focus: "FGV (Tribunal)", role: "Engenharia de Software (39 aulas) e Padrões GoF (13 aulas)." },
+  { code: "211798", name: "CGU - Auditor Federal (AFFC) - TI: Desenvolvimento de Sistemas", focus: "Alta Complexidade", role: "Clean Architecture, DDD, Query Tuning e RAG." },
+  { code: "210973", name: "DPE PB - Analista da Defensoria - Desenvolvimento de Sistemas", focus: "Paraíba", role: "System Design, POO/SOLID, Observabilidade e SAST." },
+  { code: "212301", name: "TRF 3ª Região - Técnico Judiciário - Desenvolvimento de Sistemas", focus: "Tribunal", role: "Ecossistema PJe, PDPJ-Br, Kafka, RabbitMQ, Redis e LGPD." }
 ];
 
 export const WEEKS_DATA = [
   {
     id: "sem1",
     phase: "FASE 1: Alicerce Lógico, Computacional e Algorítmico (Semanas 1 a 3)",
-    title: "SEMANA 1 (29/10 a 04/11/2026) — Arq. Computadores, SO, Estruturas de Dados e Complexidade Big-O",
-    dependency: "Entender hierarquia de memória, processos/threads (SO) e alocação de listas, pilhas, filas, árvores e tabelas hash é o pré-requisito para compreender complexidade de algoritmos (Big-O), POO e indexação em bancos de dados.",
+    title: "SEMANA 1 (02/11 a 08/11/2026) — Arq. Computadores, SO, Estruturas de Dados e Big-O",
+    dependency: "Entender hierarquia de memória, processos/threads e alocação de dados é o pré-requisito para complexidade de algoritmos e POO.",
     codes: "212091, 212092, 198499",
     days: [
-      { id: "s1d1", day: "Qui 29/10", b1Target: "RLM_1", b2Target: "FUND_1_1", b1: "RLM (Tópico 1): Conjuntos numéricos (naturais, inteiros, racionais, irracionais e reais) e operações (Cód. 212091 — Prof. Wagner Aguiar, Aulas 1–4).", b2: "Fund. 1.1: Arquitetura de computadores: processadores, registradores e hierarquia de memória primária/secundária (Cód. 198499 — Prof. Maurício Franceschini; ou SED SC — Prof. Edward Melo)." },
-      { id: "s1d2", day: "Sex 30/10", b1Target: "PORT_3", b2Target: "FUND_1_2", b1: "Português (Tópico 3): Domínio da ortografia oficial e acentuação gráfica (Cód. 212092 / TRT 8 — Prof. Claiton Natal).", b2: "Fund. 1.2: Sistemas Operacionais: Kernel, gerência de processos e threads, sincronização e gerência de memória (TJRJ IA / MPU A32 / DPE-PB 210973 — Prof. Jósis Alves e Prof. Cleirton Monte)." },
-      { id: "s1d3", day: "Sáb 31/10", b1Target: "RLM_1", b2Target: "DEV_4_1", b1: "RLM (Tópico 1): Frações, MMC, MDC, potenciação e radiciação (Cód. 212091 — Prof. Wagner Aguiar, Aulas 5–8).", b2: "Espec. 4.1: Complexidade de algoritmos e Notação Big-O: O(1), O(log n), O(n), O(n log n), O(n²) (IFPB / IFCE / PND — Prof. Rogério Araújo e Cód. 212091 — Prof. Júlio Leitão)." },
-      { id: "s1d4", day: "Dom 01/11", b1: "Descanso Sensorial Obrigatório (Prevenção de Burnout Autista)", b2: "Revisão leve opcional de 20 min dos flashcards da semana.", isRest: true },
-      { id: "s1d5", day: "Seg 02/11", b1Target: "PORT_5_1", b2Target: "DEV_4_1", b1: "Português (Tópico 5.1): Emprego das classes de palavras I: substantivo, adjetivo, artigo e numeral (Cód. 212091 — Prof. Claiton Natal, Aulas 1–3).", b2: "Espec. 4.1: Estruturas de dados lineares: Listas encadeadas, Pilhas (LIFO) e Filas (FIFO) (Cód. 212091 — Prof. Júlio Leitão; ou Prof. Rogério Araújo)." },
-      { id: "s1d6", day: "Ter 03/11", b1Target: "RLM_1", b2Target: "DEV_4_1", b1: "RLM (Tópico 1): Teoria dos conjuntos, operações e diagramas de Venn (Cód. 212091 — Prof. Wagner Aguiar, Aulas 9–11).", b2: "Espec. 4.1: Estruturas não lineares: Árvores (binárias, busca, AVL, B/B+) e Tabelas Hash / colisões (Cód. 212091 — Prof. Júlio Leitão)." },
-      { id: "s1d7", day: "Qua 04/11", b1Target: "PORT_5_1", b2Target: "DEV_4_1", b1: "Português (Tópico 5.1): Classes de palavras II: pronomes e verbos (Cód. 212091 — Prof. Claiton Natal, Aulas 4–6).", b2: "Espec. 4.2: Algoritmos de busca (linear e binária) e ordenação (Bubble, Insertion, Selection, Merge, Quick e Heap Sort) (Cód. 212091 — Júlio Leitão + PND — Rogério Araújo)." }
+      { id: "s1d1", day: "Seg 02/11", b1Target: "PORT_3", b2Target: "FUND_1_1", b1: "Português: Ortografia oficial e acentuação (Cód. 212092 — Claiton Natal).", b2: "Fund. 1.1: Arquitetura de computadores e hierarquia de memória (Cód. 198499 — Maurício Franceschini)." },
+      { id: "s1d2", day: "Ter 03/11", b1Target: "RLM_1", b2Target: "FUND_1_2", b1: "RLM: Conjuntos numéricos e operações (Cód. 212091 — Wagner Aguiar).", b2: "Fund. 1.2: Sistemas Operacionais: Kernel, processos, threads e memória (DPE-PB 210973)." },
+      { id: "s1d3", day: "Qua 04/11", b1Target: "PORT_5_1", b2Target: "DEV_4_1", b1: "Português: Classes de palavras I (substantivo, adjetivo, artigo).", b2: "Espec. 4.1: Complexidade Big-O e estruturas lineares (Listas, Pilhas, Filas)." },
+      { id: "s1d4", day: "Qui 05/11", b1Target: "RLM_1", b2Target: "DEV_4_1", b1: "RLM: Frações, MMC, MDC e potenciação.", b2: "Espec. 4.1: Estruturas não lineares (Árvores e Tabelas Hash)." },
+      { id: "s1d5", day: "Sex 06/11", b1Target: "PORT_5_1", b2Target: "DEV_4_1", b1: "Português: Classes de palavras II (pronomes e verbos).", b2: "Espec. 4.2: Algoritmos de busca e ordenação (Bubble, Quick, Merge Sort)." },
+      { id: "s1d6", day: "Sáb 07/11", b1Target: "RLM_1", b2Target: "DEV_4_1", b1: "RLM: Teoria dos conjuntos e diagramas de Venn + 15 questões FGV.", b2: "Revisão da semana e fechamento de fichas de algoritmos." },
+      { id: "s1d7", day: "Dom 08/11", b1: "Descanso Sensorial Obrigatório", b2: "Prevenção de Burnout.", isRest: true }
     ]
   },
   {
     id: "sem2",
-    title: "SEMANA 2 (05/11 a 11/11/2026) — POO, Princípios SOLID, Padrões GoF, IoC/DI e Redes TCP/IP",
-    dependency: "Com as estruturas de dados dominadas, você avança para POO, que sustenta os 5 princípios SOLID, os 23 Padrões GoF e a Injeção de Dependência (IoC/DI). Em paralelo, Redes TCP/IP sucede SO e prepara a base para APIs e Nuvem.",
-    codes: "210973, 198499, 211798, 194432",
+    title: "SEMANA 2 (09/11 a 15/11/2026) — POO, SOLID, Padrões GoF e Redes TCP/IP",
+    dependency: "Com estruturas de dados dominadas, avança-se para POO, SOLID e Padrões GoF.",
+    codes: "210973, 198499, 211798",
     days: [
-      { id: "s2d1", day: "Qui 05/11", b1Target: "RLM_2", b2Target: "DEV_4_1", b1: "RLM (Tópicos 2 e 3): Razões e proporções + Regra de três simples e composta (Cód. 194432 — Prof. Marcelo Leite & Thiago Cardoso; ou Josimar Padilha).", b2: "Espec. 4.3: Programação Orientada a Objetos (POO): classes, objetos, herança, polimorfismo, encapsulamento e abstração (DPE-PB 210973 / TRF4 — Prof. Rogério Araújo)." },
-      { id: "s2d2", day: "Sex 06/11", b1Target: "PORT_5_1", b2Target: "DEV_4_1", b1: "Português (Tópico 5.1): Classes de palavras III: advérbios, preposições e conjunções (Cód. 212091 — Prof. Claiton Natal, Aulas 7–10).", b2: "Espec. 4.3: Princípios SOLID (SRP, OCP, LSP, ISP e DIP), acoplamento e coesão (DPE-PB 210973 / TRF4 — Prof. Rogério Araújo; ou CGU 211798 — Prof.ª Ana Júlia)." },
-      { id: "s2d3", day: "Sáb 07/11", b1Target: "RLM_4", b2Target: "DEV_3_1", b1: "RLM (Tópicos 4 e 5): Porcentagem + Juros simples e compostos (Cód. 194432 — Marcelo Leite; ou Mat. Financeira — Wagner Aguiar / Wagner Ribeiro).", b2: "Espec. 3.1: Padrões de Projeto GoF I — Criacionais (Singleton, Factory Method, Abstract Factory, Builder, Prototype) (TJRJ 198499 / 212091 — Prof. Júlio Leitão; ou Washington Almeida)." },
-      { id: "s2d4", day: "Dom 08/11", b1: "Descanso Sensorial Obrigatório", b2: "Revisão leve opcional dos 5 princípios SOLID e 5 padrões GoF criacionais.", isRest: true },
-      { id: "s2d5", day: "Seg 09/11", b1Target: "PORT_4_2", b2Target: "DEV_3_1", b1: "Português (Tópico 4.2): Emprego de tempos e modos verbais (Português Intensivo FGV — Prof. Márcio Wesley; ou 212091 — Claiton Natal).", b2: "Espec. 3.1: Padrões GoF II — Estruturais (Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy) (TJRJ 198499 / 212091 — Prof. Júlio Leitão)." },
-      { id: "s2d6", day: "Ter 10/11", b1Target: "RLM_5", b2Target: "DEV_3_1", b1: "RLM (Revisão Tópicos 2 a 5): Bateria de 15 questões FGV de razão, proporção, porcentagem e juros.", b2: "Espec. 3.1 e 3.2: Padrões GoF III — Comportamentais (Strategy, Observer, Command, Template Method, Iterator, State...) + Padrões de Arquitetura Corporativa, IoC e Injeção de Dependência (198499 + CGU 211798)." },
-      { id: "s2d7", day: "Qua 11/11", b1Target: "PORT_5_7", b2Target: "FUND_1_3", b1: "Português (Tópico 5.8): Colocação dos pronomes átonos: próclise, mesóclise e ênclise (212091 — Claiton Natal + Intensivo FGV — Márcio Wesley).", b2: "Fund. 1.3: Redes de computadores e protocolos TCP/IP: camadas, IPv4/IPv6, TCP/UDP, DNS, DHCP, HTTP/HTTPS, VLAN 802.1Q, OSPF e BGP (MPU A32 / DPE-PB Redes / Curso Isolado — Prof. Edward Melo)." }
+      { id: "s2d1", day: "Seg 09/11", b1Target: "PORT_5_1", b2Target: "DEV_4_1", b1: "Português: Classes de palavras III (advérbios, preposições, conjunções).", b2: "Espec. 4.3: POO (classes, herança, polimorfismo, encapsulamento)." },
+      { id: "s2d2", day: "Ter 10/11", b1Target: "RLM_2", b2Target: "DEV_4_1", b1: "RLM: Razões, proporções e regra de três.", b2: "Espec. 4.3: Princípios SOLID e acoplamento." },
+      { id: "s2d3", day: "Qua 11/11", b1Target: "PORT_4_2", b2Target: "DEV_3_1", b1: "Português: Tempos e modos verbais.", b2: "Espec. 3.1: Padrões GoF Criacionais e Estruturais (Singleton, Factory, Adapter)." },
+      { id: "s2d4", day: "Thu 12/11", b1Target: "RLM_4", b2Target: "DEV_3_1", b1: "RLM: Porcentagem e juros simples/compostos.", b2: "Espec. 3.1: Padrões GoF Comportamentais + Injeção de Dependência (IoC/DI)." },
+      { id: "s2d5", day: "Fri 13/11", b1Target: "PORT_5_7", b2Target: "FUND_1_3", b1: "Português: Colocação pronominal.", b2: "Fund. 1.3: Redes TCP/IP, camadas, IPv4/IPv6, DNS, HTTP/HTTPS." },
+      { id: "s2d6", day: "Sat 14/11", b1Target: "RLM_5", b2Target: "FUND_1_3", b1: "RLM: Revisão de matemática financeira + Questões FGV.", b2: "Redes Avançadas: VLANs 802.1Q, OSPF e BGP." },
+      { id: "s2d7", day: "Sun 15/11", b1: "Descanso Sensorial Obrigatório", b2: "Validação de inscrição e laudo PCD/TEA.", isRest: true }
     ]
   },
   {
     id: "sem3",
-    title: "SEMANA 3 (12/11 a 18/11/2026) — Modelagem ER, Álgebra Relacional, Normalização (1FN–3FN), SQL ANSI e SGBDs [PRAZO INSCRIÇÃO!]",
-    dependency: "Antes de estudar Hibernate/JPA, Spring Data ou Query Tuning, é indispensável dominar o Modelo Relacional, a Álgebra Relacional, as Formas Normais (1FN–3FN) e o SQL ANSI puro.",
+    title: "SEMANA 3 (16/11 a 22/11/2026) — Modelagem ER, Normalização, SQL ANSI e SGBDs [Prazo Inscrição: 18/11]",
+    dependency: "Domínio relacional e SQL puro antes de Hibernate/JPA.",
     codes: "212091, 211798",
     days: [
-      { id: "s3d1", day: "Qui 12/11", b1Target: "RLM_6", b2Target: "FUND_1_4", b1: "RLM (Tópico 6): Equações de 1º e 2º graus e inequações (Cód. 212091 — Prof. Wagner Aguiar, Tópico 2; ou André Arruda).", b2: "Fund. 1.4 e Espec. 6.1: Conceitos de SGBD, Modelagem Conceitual (MER) e Modelo Relacional: relações, chaves e restrições de integridade (Cód. 212091 — Prof. Washington Almeida, Aulas 1–9)." },
-      { id: "s3d2", day: "Sex 13/11", b1Target: "PORT_5_1", b2Target: "DEV_6_1", b1: "Português (Tópico 5): Estrutura morfossintática do período I: termos ligados ao verbo (Cód. 212091 — Prof. Claiton Natal, Tópico 3, Aulas 1–6).", b2: "Espec. 6.1 e 6.2: Álgebra Relacional (seleção, projeção, junção, conjuntos) + Dependências funcionais e Normalização (1FN, 2FN, 3FN e BCNF) (Cód. 212091 — Prof. Washington Almeida, Aulas 10–15)." },
-      { id: "s3d3", day: "Sáb 14/11", b1Target: "RLM_6", b2Target: "DEV_6_1", b1: "RLM (Tópico 6): Sistemas de equações lineares e problemas algébricos (Cód. 212091 — Prof. Wagner Aguiar).", b2: "Fund. 5.1 e Espec. 6.3 (Parte 1): Linguagem SQL (ANSI): DDL (CREATE, ALTER, DROP) e DML (SELECT, INSERT, UPDATE, DELETE) (Cód. 212091 — Prof. Washington Almeida, SQL I e II)." },
-      { id: "s3d4", day: "Dom 15/11", b1: "Descanso Sensorial Obrigatório", b2: "Verificar comprovante de inscrição, envio do laudo PCD/TEA e pedido de Tempo Adicional (+1h) no portal da FGV.", isRest: true },
-      { id: "s3d5", day: "Seg 16/11", b1Target: "PORT_5_1", b2Target: "DEV_6_1", b1: "Português (Tópico 5): Morfossintaxe II: complemento nominal, adjunto adnominal, adverbial, aposto e vocativo (Cód. 212091 — Aulas 7–12).", b2: "Espec. 6.3 (Parte 2): SQL ANSI: Joins (INNER, LEFT, RIGHT, FULL), Subconsultas e Funções de Agregação (GROUP BY e HAVING) (Cód. 212091 — Washington Almeida, SQL III e IV + CGU 211798)." },
-      { id: "s3d6", day: "Ter 17/11", b1Target: "RLM_7", b2Target: "DEV_6_1", b1: "RLM (Tópico 7): Funções: domínio, imagem, funções de 1º e 2º graus, exponencial e logarítmica (Cód. 212091 — Wagner Aguiar).", b2: "Espec. 6.3 (Parte 3): SQL ANSI: DCL (GRANT, REVOKE), TCL (COMMIT, ROLLBACK, SAVEPOINT) e Objetos de BD: Views, Triggers e Stored Procedures (Cód. 212091 — SQL V + PL/SQL)." },
-      { id: "s3d7", day: "Qua 18/11", b1Target: "PORT_5_1", b2Target: "DEV_6_1", b1: "⚠️ PRAZO FINAL INSCRIÇÃO TJPB (16h)! Português: Revisão de sintaxe da oração (15 questões FGV).", b2: "Espec. 6.5: SGBDs relacionais de mercado: PostgreSQL, Oracle, MySQL/MariaDB e Microsoft SQL Server (Cód. 212091 + TJPB BD + CIDASC/MP-SE — Prof. Washington Almeida e Prof. Paulo Sérgio)." }
+      { id: "s3d1", day: "Seg 16/11", b1Target: "PORT_5_1", b2Target: "DEV_6_1", b1: "Português: Sintaxe da oração (termos ligados ao verbo).", b2: "Fund. 1.4 / Espec. 6.1: MER e Modelo Relacional (Washington Almeida)." },
+      { id: "s3d2", day: "Ter 17/11", b1Target: "RLM_6", b2Target: "DEV_6_1", b1: "RLM: Equações de 1º e 2º graus e inequações.", b2: "Espec. 6.1/6.2: Álgebra Relacional e Normalização (1FN, 2FN, 3FN)." },
+      { id: "s3d3", day: "Qua 18/11", b1Target: "PORT_5_1", b2Target: "DEV_6_1", b1: "⚠️ ÚLTIMO DIA INSCRIÇÃO TJPB (16h)! Português: Termos ligados ao nome.", b2: "Espec. 6.3: SQL ANSI (DDL e DML: SELECT, INSERT, UPDATE, DELETE)." },
+      { id: "s3d4", day: "Thu 19/11", b1Target: "RLM_6", b2Target: "DEV_6_1", b1: "RLM: Sistemas de equações lineares.", b2: "Espec. 6.3: SQL Avançado (Joins, Subconsultas, GROUP BY e HAVING)." },
+      { id: "s3d5", day: "Fri 20/11", b1Target: "PORT_5_5", b2Target: "DEV_6_1", b1: "Português: Regência verbal e nominal.", b2: "Espec. 6.3: DCL, TCL, Views, Triggers e Stored Procedures." },
+      { id: "s3d6", day: "Sat 21/11", b1Target: "RLM_7", b2Target: "DEV_6_1", b1: "RLM: Funções afim e quadrática + Questões FGV.", b2: "SGBDs (PostgreSQL, Oracle) + Treino Discursivo 1 (POO + SQL)." },
+      { id: "s3d7", day: "Sun 22/11", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true }
     ]
   },
   {
     id: "sem4",
     phase: "FASE 2: Linguagens, Frameworks, Front-End, Mobile e BD Avançado (Semanas 4 a 6)",
-    title: "SEMANA 4 (19/11 a 25/11/2026) — Java Moderno, Spring Boot, Hibernate/JPA, Python (FastAPI/Django) e Discursiva 1",
-    dependency: "Com POO + Padrões GoF + SQL ANSI consolidados nas Semanas 2 e 3, o mapeamento objeto-relacional (Hibernate/JPA) e a construção de APIs REST em Spring Boot, Django e FastAPI fluem naturalmente.",
-    codes: "212091, 207803, 211798, 212093, 180207",
+    title: "SEMANA 4 (23/11 a 29/11/2026) — Java Moderno, Spring Boot, Hibernate/JPA e Python",
+    dependency: "Hibernate/JPA e APIs REST em Spring Boot, Django e FastAPI.",
+    codes: "212091, 207803, 211798",
     days: [
-      { id: "s4d1", day: "Qui 19/11", b1Target: "RLM_8", b2Target: "DEV_4_3", b1: "RLM (Tópico 8): Sequências numéricas, de letras, datas e figuras; PA e PG (Curso 180207 — Prof. André Arruda; ou Josimar Padilha).", b2: "Espec. 4.4 (Parte 1): Java: Collections (List, Set, Map), Generics, Streams API e Expressões Lambda (Cód. 212091 + CGU 211798 — Prof. Rogério Araújo e Prof. Gunter Amorim)." },
-      { id: "s4d2", day: "Sex 20/11", b1Target: "PORT_5_5", b2Target: "DEV_4_3", b1: "Português (Tópico 5.6): Regência verbal e nominal (Cód. 212093 — Prof. Claiton Natal, Regência I a III; ou Márcio Wesley).", b2: "Espec. 4.4 (Parte 2): Recursos modernos do Java: Records, Sealed Classes, Pattern Matching, Switch Expressions e Virtual Threads (DATAPREV 207803 + CGU 211798 — Rogério Araújo)." },
-      { id: "s4d3", day: "Sáb 21/11", b1Target: "RLM_9", b2Target: "DEV_4_3", b1: "RLM (Tópico 9): Matrizes e determinantes: operações, matriz inversa e sistemas matriciais (Cód. 180207 — André Arruda + DATAPREV Perfil 4).", b2: "Espec. 4.5 (Parte 1) + DISCURSIVA 1: Hibernate/JPA (anotações, Lazy/Eager, ciclo de vida, JPQL) (CGU 211798) + Treino Discursivo 1 (30 linhas: POO + GoF + JPA + SQL)." },
-      { id: "s4d4", day: "Dom 22/11", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s4d5", day: "Seg 23/11", b1Target: "PORT_5_7", b2Target: "DEV_4_3", b1: "Português (Tópico 5.7): Emprego do sinal indicativo de crase (Português Intensivo FGV — Prof. Márcio Wesley; ou DATAPREV 207807).", b2: "Espec. 4.5 (Parte 2): Frameworks Java EE / Jakarta EE, Spring Framework e Spring Boot (IoC, Spring MVC/REST, Spring Data, Spring Security) (DATAPREV 207803 + CGU 211798 — Gunter Amorim / Rogério Araújo)." },
-      { id: "s4d6", day: "Ter 24/11", b1Target: "RLM_9", b2Target: "DEV_4_4", b1: "RLM (Revisão Tópicos 8 e 9): Bateria de 15 questões FGV de sequências, matrizes e determinantes.", b2: "Espec. 4.7 (Parte 1): Python: sintaxe, tipos e estruturas de dados básicas (listas, tuplas, sets, dicionários, comprehensions) (Cód. 212091 — Prof. Gunter Amorim e Prof. Rogério Araújo)." },
-      { id: "s4d7", day: "Qua 25/11", b1Target: "PORT_5_5", b2Target: "DEV_4_4", b1: "Português (Tópico 5.5): Concordância verbal e nominal (Cód. 212092 — Prof. Claiton Natal, Concordância I e II + Exercícios).", b2: "Espec. 4.7 (Parte 2): Desenvolvimento Web com Python: Django (MTV, ORM, migrations) e FastAPI (Pydantic, rotas assíncronas, OpenAPI) (Cód. 212091 + SEPLAN-AP — Gunter Amorim / Rogério Araújo)." }
+      { id: "s4d1", day: "Seg 23/11", b1Target: "RLM_8", b2Target: "DEV_4_3", b1: "RLM: Sequências numéricas, PA e PG.", b2: "Espec. 4.4: Java Collections, Generics, Streams e Lambdas." },
+      { id: "s4d2", day: "Ter 24/11", b1Target: "PORT_5_5", b2Target: "DEV_4_3", b1: "Português: Regência.", b2: "Espec. 4.4: Recursos modernos do Java (Records, Pattern Matching, Virtual Threads)." },
+      { id: "s4d3", day: "Qua 25/11", b1Target: "RLM_9", b2Target: "DEV_4_3", b1: "RLM: Matrizes e determinantes.", b2: "Espec. 4.5: Hibernate/JPA (Mapeamento, Lazy/Eager, JPQL)." },
+      { id: "s4d4", day: "Thu 26/11", b1Target: "PORT_5_5", b2Target: "DEV_4_3", b1: "Português: Concordância.", b2: "Espec. 4.5: Spring Framework, Spring Boot e Spring Security." },
+      { id: "s4d5", day: "Fri 27/11", b1Target: "RLM_9", b2Target: "DEV_4_4", b1: "RLM: Revisão de matrizes.", b2: "Espec. 4.7: Python sintaxe básica e estruturas de dados." },
+      { id: "s4d6", day: "Sat 28/11", b1Target: "PORT_5_5", b2Target: "DEV_4_4", b1: "Português: Concordância avançada + Questões.", b2: "Espec. 4.7: Desenvolvimento web com Python (Django e FastAPI)." },
+      { id: "s4d7", day: "Sun 29/11", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true }
     ]
   },
   {
     id: "sem5",
-    title: "SEMANA 5 (26/11 a 02/12/2026) — JS/TypeScript, Node.js, Angular, React, UI/UX, Acessibilidade (eMAG/WCAG) e Discursiva 2",
-    dependency: "Consolidado o back-end na Semana 4, você avança para JavaScript/TypeScript, Node.js e os frameworks front-end (Angular e React), conectando-os diretamente a UI/UX, Design Systems, Mobile-First e Acessibilidade (eMAG/WCAG 2.1 e 2.2).",
-    codes: "212091, 207803, 210973, 212301",
+    title: "SEMANA 5 (30/11 a 06/12/2026) — JS/TS, Node.js, Angular, React, UI/UX e Acessibilidade",
+    dependency: "Front-end ligado a UI/UX, Design Systems e Acessibilidade (eMAG/WCAG).",
+    codes: "212091, 207803, 210973",
     days: [
-      { id: "s5d1", day: "Qui 26/11", b1Target: "RLM_11", b2Target: "DEV_4_4", b1: "RLM (Tópico 11): Análise combinatória: princípio fundamental da contagem, permutações, arranjos e combinações (Cód. 180207 — André Arruda & Thiago Cardoso; ou 194432).", b2: "Espec. 4.6 (Parte 1): JavaScript (ES6+, closures, promises, async/await), TypeScript (tipagem estática, interfaces, generics) e Node.js (Event Loop) (Cód. 212091 — Prof. Júlio Leitão + DATAPREV 207803)." },
-      { id: "s5d2", day: "Sex 27/11", b1Target: "PORT_5_2", b2Target: "DEV_4_4", b1: "Português (Tópicos 5.2 e 5.3): Relações de coordenação e de subordinação entre orações e termos (Cód. 212091 — Prof. Claiton Natal, Tópicos 4 e 5).", b2: "Espec. 4.6 (Parte 2): Frameworks frontend: React (JSX, Virtual DOM, Props, State, Hooks) e Angular (Components, Modules, Directives, Services/DI, RxJS) (DATAPREV 207803 + TRT-4 — Prof.ª Ana Júlia e Júlio Leitão)." },
-      { id: "s5d3", day: "Sáb 28/11", b1Target: "RLM_10", b2Target: "DEV_11_1", b1: "RLM (Tópico 10): Probabilidade: espaço amostral, probabilidade condicional, união/interseção de eventos e binomial (Cód. 180207 + 194432).", b2: "Domínio 11 (11.1 a 11.3) + DISCURSIVA 2: UI/UX (clareza, consistência, feedback, user flows, wireframes, protótipos, Design Systems, style guides, mobile-first) + Treino Discursivo 2 (Portal Judicial UX/WCAG)." },
-      { id: "s5d4", day: "Dom 29/11", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s5d5", day: "Seg 30/11", b1Target: "PORT_5_2", b2Target: "DEV_11_1", b1: "Português (Tópicos 5.2 e 5.3): Orações reduzidas e exercícios de conectivos subordinativos/coordenativos (Cód. 212091 — Claiton Natal).", b2: "Fund. 6.4 e Domínio 11 (11.4): Acessibilidade digital: eMAG e WCAG 2.1 e 2.2 (princípios Perceptível, Operável, Compreensível e Robusto; níveis A, AA, AAA; semântica HTML5, ARIA e leitores de tela) (MP-ES Aula 11 — Gunter Amorim + Leandro Martins)." },
-      { id: "s5d6", day: "Ter 01/12", b1Target: "RLM_12", b2Target: "DEV_11_1", b1: "RLM (Tópico 12): Estatística descritiva: média, mediana, moda, separatrizes, amplitude, variância, desvio padrão e coef. de variação (Cód. 212093 — Thiago Cardoso; ou Pedro Campos).", b2: "Revisão Prática Front-End e UI/UX: Bateria de 25 questões FGV de JS/TS, React, Angular, Usabilidade, HTML5/ARIA, eMAG e WCAG 2.1/2.2." },
-      { id: "s5d7", day: "Qua 02/12", b1Target: "PORT_5_4", b2Target: "DEV_4_3", b1: "Português (Tópico 5.4): Emprego dos sinais de pontuação (Cód. 212093 — Prof. Claiton Natal, Pontuação I, II e Coordenadas).", b2: "Revisão Integrada de Programação Web: Bateria de 25 questões FGV de Java, Spring Boot, Hibernate/JPA, Python (FastAPI/Django) e Node.js." }
+      { id: "s5d1", day: "Seg 30/11", b1Target: "RLM_11", b2Target: "DEV_4_4", b1: "RLM: Análise combinatória.", b2: "Espec. 4.6: JavaScript (ES6+), TypeScript e Node.js." },
+      { id: "s5d2", day: "Ter 01/12", b1Target: "PORT_5_2", b2Target: "DEV_4_4", b1: "Português: Período composto (coordenação e subordinação).", b2: "Espec. 4.6: Frameworks frontend (React e Angular)." },
+      { id: "s5d3", day: "Qua 02/12", b1Target: "RLM_10", b2Target: "DEV_11_1", b1: "RLM: Probabilidade.", b2: "Domínio 11: UI/UX, wireframes, protótipos e Design Systems + Treino Discursivo 2." },
+      { id: "s5d4", day: "Thu 03/12", b1Target: "PORT_5_2", b2Target: "DEV_11_1", b1: "Português: Orações reduzidas e conectivos.", b2: "Fund. 6.4 / Domínio 11: Acessibilidade digital (eMAG, WCAG 2.1/2.2, ARIA)." },
+      { id: "s5d5", day: "Fri 04/12", b1Target: "RLM_12", b2Target: "DEV_11_1", b1: "RLM: Estatística descritiva (média, mediana, moda, desvio padrão).", b2: "Revisão prática de Front-End e Usabilidade." },
+      { id: "s5d6", day: "Sat 05/12", b1Target: "PORT_5_4", b2Target: "DEV_4_3", b1: "Português: Pontuação + Bateria FGV.", b2: "Revisão integrada de Web (Java, Python, JS)." },
+      { id: "s5d7", day: "Sun 06/12", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true }
     ]
   },
   {
     id: "sem6",
-    title: "SEMANA 6 (03/12 a 09/12/2026) — Dart, Flutter, Desenvolvimento Mobile, Query Tuning, NoSQL e Discursiva 3",
-    dependency: "Com a lógica de componentes (vista em React na Semana 5) e de SQL (Semana 3), você aprende muito mais rápido a árvore de Widgets e gerência de estado do Flutter (Provider, BLoC, Riverpod, Cubit), a persistência/segurança Mobile e avança para Query Tuning e NoSQL.",
-    codes: "212091, 207803, 211798, 202271",
+    title: "SEMANA 6 (07/12 a 13/12/2026) — Dart, Flutter, Mobile, Query Tuning e NoSQL",
+    dependency: "Widgets Flutter, persistência mobile, Query Tuning e NoSQL.",
+    codes: "212091, 207803, 211798",
     days: [
-      { id: "s6d1", day: "Qui 03/12", b1Target: "RLM_13", b2Target: "DEV_4_6", b1: "RLM (Tópicos 13 e 14): Proposições lógicas simples e compostas + Conectivos lógicos (Cód. 202271 — Prof. Sérgio Carvalho; ou Josimar Padilha).", b2: "Espec. 4.8 (Parte 1): Dart (sintaxe, tipos, estruturas de controle, tratamento de erros, async/await, Future/Stream) + Flutter ('tudo é um widget', Stateless e Stateful Widgets e ciclo de vida) (212091 + 207803 — Júlio Leitão / Vitor Kessler)." },
-      { id: "s6d2", day: "Sex 04/12", b1Target: "PORT_4", b2Target: "DEV_4_6", b1: "Português (Tópicos 4 e 4.1): Mecanismos de coesão textual: referenciação, substituição, repetição, conectores e sequenciação (Cód. 212092/212094 — Prof.ª Tereza Cavalcanti).", b2: "Espec. 4.8 (Parte 2): Flutter: gerenciamento de estado e reatividade (Provider, BLoC, Riverpod e Cubit), layout responsivo com Material Design e Cupertino, navegação, roteamento e rotas nomeadas (212091 + 207803)." },
-      { id: "s6d3", day: "Sáb 05/12", b1Target: "RLM_15", b2Target: "DEV_5_1", b1: "RLM (Tópico 15): Tabelas-verdade: construção, tautologia, contradição e contingência (Cód. 202271 — Sérgio Carvalho).", b2: "Domínio 5 (5.1 a 5.4): Ciclo de vida Android/iOS; Persistência local (SQLite, Room, Hive/Isar, SharedPreferences/NSUserDefaults); Segurança mobile (SSL Pinning, engenharia reversa, TLS/SSL); REST JSON e Push (FCM) (212091 + 207803 + TCE-MA — Júlio Leitão / Fabrício Melo)." },
-      { id: "s6d4", day: "Dom 06/12", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s6d5", day: "Seg 07/12", b1Target: "PORT_6", b2Target: "DEV_6_4", b1: "Português (Tópicos 6.1 a 6.3): Significação das palavras (polissemia, ambiguidade, sinônimos, parônimos), substituição e reorganização de períodos (212092 — Tereza Cavalcanti + Márcio Wesley).", b2: "⚠️ Espec. 6.4 (LACUNA DO 212091!): Otimização de consultas (Query Tuning): planos de execução, indexação (B-Tree, Bitmap, Hash), estatísticas e particionamento (Estudar em: TJPB BD/Infra + CGU 211798 Tóp. 2.3/2.4 + BRDE — Prof. Washington Almeida)." },
-      { id: "s6d6", day: "Ter 08/12", b1Target: "RLM_16", b2Target: "DEV_6_1", b1: "RLM (Tópico 16): Equivalências lógicas e negações de proposições compostas / Leis de De Morgan (Cód. 202271 — Sérgio Carvalho).", b2: "Espec. 6.6 + DISCURSIVA 3: Bancos de dados NoSQL: chave-valor (Redis), documentos (MongoDB), colunares, grafos e bancos vetoriais (Cód. 212091 — Prof. Vitor Kessler) + Treino Discursivo 3 (Query Tuning e Modelagem)." },
-      { id: "s6d7", day: "Qua 09/12", b1Target: "PORT_6", b2Target: "DEV_6_4", b1: "Português (Tópico 6.4): Reescrita de textos de diferentes gêneros e níveis de formalidade (Intensivo FGV — Márcio Wesley + TRF3 212301).", b2: "Revisão Geral da Fase 2: Bateria de 25 questões FGV de Dart/Flutter, Mobile, SQL Avançado, Query Tuning e NoSQL." }
+      { id: "s6d1", day: "Seg 07/12", b1Target: "RLM_13", b2Target: "DEV_4_6", b1: "RLM: Proposições lógicas e conectivos.", b2: "Espec. 4.8: Dart e Flutter (Widgets, Stateless/Stateful)." },
+      { id: "s6d2", day: "Ter 08/12", b1Target: "PORT_4", b2Target: "DEV_4_6", b1: "Português: Coesão textual.", b2: "Espec. 4.8: Flutter gerenciamento de estado (Provider, BLoC, Riverpod)." },
+      { id: "s6d3", day: "Wed 09/12", b1Target: "RLM_15", b2Target: "DEV_5_1", b1: "RLM: Tabelas-verdade.", b2: "Domínio 5: Mobile (Ciclo de vida, SQLite/Room, Hive, SSL Pinning, Push FCM)." },
+      { id: "s6d4", day: "Thu 10/12", b1Target: "PORT_6", b2Target: "DEV_6_4", b1: "Português: Significação e substituição de palavras.", b2: "⚠️ Espec. 6.4: Otimização de consultas (Query Tuning, índices B-Tree/Bitmap, particionamento)." },
+      { id: "s6d5", day: "Fri 11/12", b1Target: "RLM_16", b2Target: "DEV_6_1", b1: "RLM: Equivalências lógicas e De Morgan.", b2: "Espec. 6.6: NoSQL (Redis, MongoDB, colunares, grafos) + Treino Discursivo 3." },
+      { id: "s6d6", day: "Sat 12/12", b1Target: "PORT_6", b2Target: "DEV_6_4", b1: "Português: Reescrita de textos + Bateria FGV.", b2: "Revisão geral da Fase 2 (Mobile, Query Tuning, NoSQL)." },
+      { id: "s6d7", day: "Sun 13/12", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true }
     ]
   },
   {
     id: "sem7",
     phase: "FASE 3: Engenharia de Software, Qualidade/Testes, Arquitetura Avançada e System Design (Semanas 7 e 8)",
-    title: "SEMANA 7 (10/12 a 16/12/2026) — Engenharia de Software, Scrum, Kanban, Lean, SAFe, APF/IFPUG, SDD e Testes/Qualidade",
-    dependency: "Sabendo como o software é codificado e persistido, você sobe um nível de abstração para especificar requisitos, estimar por Pontos de Função (APF), gerenciar entregas ágeis (Scrum, Kanban, Lean, SAFe) e automatizar testes (TDD, BDD, Contract e Mutation Testing).",
+    title: "SEMANA 7 (14/12 a 20/12/2026) — Engenharia de Software, Scrum, Kanban, Lean, SAFe, APF e Testes",
+    dependency: "Requisitos, APF, metodologias ágeis (Scrum/Kanban/Lean/SAFe) e automação de testes.",
     codes: "198499, 210948, 211798",
     days: [
-      { id: "s7d1", day: "Qui 10/12", b1Target: "RLM_17", b2Target: "DEV_1_5", b1: "RLM (Tópico 18): Diagramas lógicos, proposições categóricas (Todo, Algum, Nenhum) e quantificadores (Cód. 180207 — Prof. André Arruda).", b2: "Fund. 2 e Espec. 1.1 e 1.5: Ciclo de vida (SDLC cascata e iterativo/RUP) + Engenharia de requisitos (elicitação, análise, especificação, validação, RF, RNF, regras de negócio, histórias de usuário, critérios de aceitação e backlog) (TJRJ 198499 — Prof. Washington Almeida)." },
-      { id: "s7d2", day: "Sex 11/12", b1Target: "PORT_1", b2Target: "DEV_1_1", b1: "Português (Tópico 1): Compreensão e interpretação de textos de gêneros variados no estilo FGV (Cód. 212092/212093 — Prof.ª Tereza Cavalcanti + Márcio Wesley).", b2: "Fund. 2 e Espec. 1.2: Metodologias ágeis: Scrum (papéis, eventos, artefatos e compromissos — Guia 2020) e Kanban (quadro, WIP, Lead Time, Cycle Time) (TJRJ 198499 — Washington Almeida + Cód. 210948 — Darlan Venturelli)." },
-      { id: "s7d3", day: "Sáb 12/12", b1Target: "RLM_17", b2Target: "DEV_1_3", b1: "RLM (Tópico 17): Argumentação lógica: validade de argumentos, dedução e inferência (Cód. 180207 — André Arruda; ou PH).", b2: "⚠️ Espec. 1.3 e 1.4 (LACUNAS DO 212091!): Lean Software Development (PROCERGS / TJRJ 198499) + Agilidade em escala: Scaled Agile Framework (SAFe) e agilidade organizacional (Curso Isolado Cód. 210948 — Aula 1: Práticas Ágeis em Escala SAFe — Prof. Darlan Venturelli)." },
-      { id: "s7d4", day: "Dom 13/12", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s7d5", day: "Seg 14/12", b1Target: "PORT_2", b2Target: "DEV_1_5", b1: "Português (Tópico 2): Reconhecimento de tipos e gêneros textuais e modos de organização discursiva (Cód. 212092 — Tereza Cavalcanti).", b2: "Espec. 1.6 e 1.7: Métricas de dimensionamento: Análise de Pontos de Função (APF/IFPUG: ALI, AIE, EE, SE, CE) e estimativas ágeis (SEPLAN-AP / 198499 — Washington Almeida) + SDD: especificação executável (BDD/ATDD) e harness de engenharia assistida por IA (DPE-PB 210973 + CGU 211798)." },
-      { id: "s7d6", day: "Ter 15/12", b1Target: "RLM_19", b2Target: "DEV_9_4", b1: "RLM (Tópico 19): Resolução de problemas envolvendo raciocínio lógico-matemático: verdades/mentiras, associação e casa dos pombos (Cód. 180207).", b2: "Fund. 2 e Espec. 9.5: Qualidade e Tipos de Testes: unitários, integração, funcionais, sistema, aceitação e carga/desempenho; Automação e TDD; Contract Testing e noções de Mutation Testing (TJRJ 198499 Aulas 13–22 + CGU 211798 — Washington Almeida)." },
-      { id: "s7d7", day: "Qua 16/12", b1Target: "PORT_1", b2Target: "DEV_3_4", b1: "Português: Bateria de 15 questões de Interpretação e Tipologia FGV (Curso FGV em Exercícios — Prof.ª Ludimilla Costa).", b2: "Espec. 3.7: Métricas de qualidade de software e qualidade arquitetural: qualidade do código, cobertura de testes, densidade de defeitos, MTTR, prazo de antecedência (lead time), frequência de liberação, bugs e satisfação (CGU 211798 + TJRJ 198499)." }
+      { id: "s7d1", day: "Seg 14/12", b1Target: "RLM_17", b2Target: "DEV_1_5", b1: "RLM: Argumentação e dedução.", b2: "Fund. 2 / Espec. 1.1/1.5: SDLC (Cascata, RUP) e Requisitos (RF, RNF, Backlog)." },
+      { id: "s7d2", day: "Ter 15/12", b1Target: "PORT_1", b2Target: "DEV_1_1", b1: "Português: Interpretação de textos FGV.", b2: "Fund. 2 / Espec. 1.2: Metodologias Ágeis: Scrum e Kanban." },
+      { id: "s7d3", day: "Wed 16/12", b1Target: "RLM_17", b2Target: "DEV_1_3", b1: "RLM: Diagramas lógicos.", b2: "⚠️ Espec. 1.3/1.4: Lean Software Development e SAFe (Agilidade em Escala)." },
+      { id: "s7d4", day: "Thu 17/12", b1Target: "PORT_2", b2Target: "DEV_1_5", b1: "Português: Tipos e gêneros textuais.", b2: "Espec. 1.6/1.7: Métricas APF/IFPUG e Estimativas Ágeis (Story Points) + SDD." },
+      { id: "s7d5", day: "Fri 18/12", b1Target: "RLM_19", b2Target: "DEV_9_4", b1: "RLM: Resolução de problemas lógicos.", b2: "Fund. 2 / Espec. 9.5: Testes de software (Unitários, TDD, BDD, Contract Testing)." },
+      { id: "s7d6", day: "Sat 19/12", b1Target: "PORT_1", b2Target: "DEV_3_4", b1: "Português: Interpretação (FGV em Exercícios).", b2: "Espec. 3.7: Métricas de Qualidade Arquitetural (MTTR, Lead Time)." },
+      { id: "s7d7", day: "Sun 20/12", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true }
     ]
   },
   {
     id: "sem8",
-    title: "SEMANA 8 (17/12 a 23/12/2026) — Clean Architecture, DDD, SOA, Microsserviços, EDA (Kafka/RabbitMQ), System Design e Discursiva 4",
-    dependency: "Reúne tudo o que foi estudado em programação, bancos de dados e redes para arquitetar sistemas distribuídos de grande escala, dominando os trade-offs (CAP/PACELC), cache distribuído (Redis) e resiliência (Circuit Breaker).",
-    codes: "212091, 211798, 210973, 198053, 212301",
+    title: "SEMANA 8 (21/12 a 27/12/2026) — Clean Architecture, DDD, Microsserviços, EDA e System Design",
+    dependency: "Arquitetura de sistemas distribuídos, CAP/PACELC, Redis e resiliência.",
+    codes: "212091, 211798, 210973, 198053",
     days: [
-      { id: "s8d1", day: "Qui 17/12", b1Target: "RLM_1", b2Target: "DEV_3_4", b1: "RLM (Revisão Bloco I): Bateria de 15 questões FGV de Conjuntos, Proporção, Porcentagem e Juros.", b2: "⚠️ Espec. 3.6 (Em produção no 212091!): Arquitetura Limpa (Clean Architecture) e Domain-Driven Design (DDD: Bounded Context, Ubiquitous Language, Entities, Value Objects, Aggregates) (Já gravado na CGU 211798 e TCE-SP — Prof.ª Ana Júlia e Prof. Washington Almeida)." },
-      { id: "s8d2", day: "Sex 18/12", b1Target: "PORT_6_5", b2Target: "DEV_3_4", b1: "Português (Tópico 6.5): Redação Oficial — Manual da Presidência da República (Versão sintética de 2 aulas no Intensivo FGV ou 25 aulas no 212092 — Prof. Márcio Wesley).", b2: "Fund. 2.1 e Espec. 3.3 e 3.4: SOA (Web Services RESTful e SOAP) e APIs + Microsserviços: decomposição, API Gateway, Service Mesh e Serverless (Cód. 212091 — Prof. Gabriel Pacheco e Prof.ª Ana Júlia)." },
-      { id: "s8d3", day: "Sáb 19/12", b1Target: "RLM_6", b2Target: "DEV_2_1", b1: "RLM (Revisão Bloco II): Bateria de 15 questões FGV de Equações, Funções, Sequências e Matrizes.", b2: "Espec. 3.5 e 2.3: Arquitetura Orientada a Eventos (EDA): mensageria e pub/sub (Apache Kafka e RabbitMQ) + Padrões de comunicação síncrona (HTTP/REST, gRPC) e assíncrona (mensageria, WebSockets) (Cód. 212091 + TRF3 212301 + MP-ES — Gunter Amorim / Vitor Kessler)." },
-      { id: "s8d4", day: "Dom 20/12", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s8d5", day: "Seg 21/12", b1Target: "PORT_6_5", b2Target: "DEV_2_1", b1: "Português: Bateria de 15 questões FGV de Redação Oficial e Reescrita de Períodos.", b2: "Domínio 2 (2.1, 2.2 e 2.4): System Design I: Abstração de grande escala; Trade-offs: latência vs throughput, Teorema CAP, PACELC e BASE vs ACID; Escalabilidade horizontal/vertical; Alta disponibilidade: failover, clustering, load balancing, replicação e sharding (CGU 211798 + TCU 198053)." },
-      { id: "s8d6", day: "Ter 22/12", b1Target: "RLM_10", b2Target: "DEV_2_4", b1: "RLM (Revisão Bloco III): Bateria de 15 questões FGV de Combinatória, Probabilidade e Estatística Descritiva.", b2: "Domínio 2 (2.5 e 2.6) + DISCURSIVA 4: System Design II: Cache em camadas (client-side, CDN, aplicação e Redis: casos de uso e políticas de expiração); Resiliência: Circuit Breaker, Graceful Degradation, NGINX e HAProxy (DPE-PB 210973 + DPDF Cargo 3 + TRF3 212301) + Treino Discursivo 4." },
-      { id: "s8d7", day: "Qua 23/12", b1Target: "PORT_4", b2Target: "DEV_2_4", b1: "Português: Bateria de 15 questões FGV de Coesão, Pontuação e Sintaxe.", b2: "Revisão Geral da Fase 3: Bateria de 25 questões FGV de Engenharia de Software, Scrum/SAFe, Padrões GoF, Clean Arch/DDD, Microsserviços e System Design." }
+      { id: "s8d1", day: "Seg 21/12", b1Target: "RLM_1", b2Target: "DEV_3_4", b1: "RLM: Revisão do Bloco I de RLM (Conjuntos e Proporção).", b2: "⚠️ Espec. 3.6: Clean Architecture e Domain-Driven Design (DDD)." },
+      { id: "s8d2", day: "Ter 22/12", b1Target: "PORT_6_5", b2Target: "DEV_3_4", b1: "Português: Redação Oficial (Manual da Presidência).", b2: "Fund. 2.1 / Espec. 3.3/3.4: SOA, Web Services (REST/SOAP) e Microsserviços." },
+      { id: "s8d3", day: "Wed 23/12", b1Target: "RLM_6", b2Target: "DEV_2_1", b1: "RLM: Revisão do Bloco II de RLM (Equações e Funções).", b2: "Espec. 3.5 / 2.3: EDA (Kafka e RabbitMQ), gRPC e WebSockets." },
+      { id: "s8d4", day: "Thu 24/12", b1: "Descanso Sensorial Obrigatório", b2: "Véspera de Natal.", isRest: true },
+      { id: "s8d5", day: "Fri 25/12", b1: "Descanso Sensorial Obrigatório", b2: "Natal.", isRest: true },
+      { id: "s8d6", day: "Sat 26/12", b1Target: "RLM_10", b2Target: "DEV_2_4", b1: "RLM: Revisão de Estatística e Probabilidade.", b2: "Domínio 2: System Design (CAP, PACELC, Redis, Sharding, NGINX) + Treino Discursivo 4." },
+      { id: "s8d7", day: "Sun 27/12", b1Target: "PORT_4", b2Target: "DEV_2_4", b1: "Português: Coesão e Pontuação.", b2: "Revisão geral da Fase 3 (Arquitetura e System Design)." }
     ]
   },
   {
     id: "sem9",
     phase: "FASE 4: DevOps, Nuvem, Segurança/DevSecOps, IA Generativa e Governança (Semanas 9 a 11)",
-    title: "SEMANA 9 (24/12 a 30/12/2026) — Nuvem, Git/GitOps, CI/CD, Docker, Kubernetes, Terraform, Observabilidade e Discursiva 5",
-    dependency: "Depois de projetar microsserviços na Semana 8, fica imediato compreender como versionar e automatizar deploys (Git/GitOps e CI/CD), empacotar (Docker), orquestrar (Kubernetes), provisionar a nuvem com código (Terraform) e monitorar tudo (Zabbix, Prometheus, Grafana, ELK e APM).",
+    title: "SEMANA 9 (28/12 a 03/01/2027) — Nuvem, Git/GitOps, CI/CD, Docker, K8s, Terraform e Observabilidade",
+    dependency: "Versionamento, empacotamento, orquestração, IaC e monitoramento.",
     codes: "212091, 212092, 210973, 212300",
     days: [
-      { id: "s9d1", day: "Qui 24/12", b1Target: "RLM_13", b2Target: "FUND_1_4", b1: "RLM: Bateria de 15 questões FGV de Lógica Proposicional, Conectivos e Tabela-Verdade.", b2: "Fund. 1.5 e Espec. 7.4: Computação em Nuvem: modelos de serviço (IaaS, PaaS, SaaS), implantação (pública, privada, híbrida), AWS, Azure, GCP e contratação de nuvem (Cód. 212091 — 13 aulas já gravadas com Prof. Vitor Kessler e Prof. Darlan Venturelli)." },
-      { id: "s9d2", day: "Sex 25/12", b1Target: "PORT_1", b2Target: "DEV_7_1", b1: "Português: Resolução de Prova FGV AL-GO Analista 2026 — Parte I (Cód. 212092/212093 — Prof.ª Tereza Cavalcanti).", b2: "⚠️ Espec. 7.1 e 7.2 (GitOps excluído do 212091!): Controle de versão com Git (branches, merge, Gitflow e Trunk-Based) + GitOps (Estudar em: TJPB Infra / Segurança 212092 + DPE-PB 210973) + CI/CD: pipelines Jenkins, GitLab CI/CD e GitHub Actions (212091 + CGU 211798)." },
-      { id: "s9d3", day: "Sáb 26/12", b1Target: "RLM_16", b2Target: "DEV_7_1", b1: "RLM: Bateria de 15 questões FGV de Equivalências Lógicas e Negações (De Morgan).", b2: "Espec. 7.3 + DISCURSIVA 5: Docker (imagens, Dockerfile, Docker Compose, volumes e redes) e Kubernetes (Pods, Deployments, Services, Ingress, ConfigMaps e Secrets) (Cód. 212091 — 8 aulas já gravadas com Prof. Vitor Kessler) + Treino Discursivo 5 (Docker/K8s/CI-CD)." },
-      { id: "s9d4", day: "Dom 27/12", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s9d5", day: "Seg 28/12", b1Target: "PORT_1", b2Target: "DEV_7_5", b1: "Português: Resolução de Prova FGV AL-GO Analista 2026 — Parte II (Cód. 212092/212093 — Prof.ª Tereza Cavalcanti).", b2: "Espec. 7.5: Infraestrutura como Código (IaC) com Terraform: providers, módulos reutilizáveis e gerenciamento de estado (state) + Ansible (IFCE Infraestrutura / TRF3 212300 / TJPB Infra — Prof. Cleirton Monte e Prof. Vitor Kessler)." },
-      { id: "s9d6", day: "Ter 29/12", b1Target: "RLM_17", b2Target: "DEV_7_5", b1: "RLM: Bateria de 15 questões FGV de Diagramas Lógicos, Argumentação e Problemas.", b2: "Espec. 7.6: Observabilidade: monitoramento de ativos, disponibilidade e desempenho, métricas e alertas (Zabbix, Prometheus e Grafana); gerenciamento de logs (coleta, retenção, indexação, correlação: ELK Stack/OpenSearch); tracing distribuído, APM e SRE (DPE-PB 210973 + SED-SC Aula 75 — Prof. Edward Melo + CGU 211798)." },
-      { id: "s9d7", day: "Qua 30/12", b1Target: "PORT_1", b2Target: "DEV_7_5", b1: "Português: Resolução de Prova FGV TJRJ Analista 2026 — Partes I e II (Cód. 212092/212093 — Prof.ª Tereza Cavalcanti).", b2: "Revisão Semana 9: Bateria de 25 questões FGV de Nuvem, Git/GitOps, CI/CD, Docker, Kubernetes, Terraform e Observabilidade (Prometheus/Grafana/ELK)." }
+      { id: "s9d1", day: "Seg 28/12", b1Target: "RLM_13", b2Target: "FUND_1_4", b1: "RLM: Lógica Proposicional e Conectivos.", b2: "Fund. 1.5 / Espec. 7.4: Computação em Nuvem (AWS, Azure, GCP)." },
+      { id: "s9d2", day: "Tue 29/12", b1Target: "PORT_1", b2Target: "DEV_7_1", b1: "Português: Provas comentadas FGV 2026 (Tereza Cavalcanti).", b2: "⚠️ Espec. 7.1/7.2: Git, Gitflow, GitOps + CI/CD (Jenkins, GitLab CI, GitHub Actions)." },
+      { id: "s9d3", day: "Wed 30/12", b1Target: "RLM_16", b2Target: "DEV_7_1", b1: "RLM: Equivalências lógicas e Leis de De Morgan.", b2: "Espec. 7.3: Docker e Kubernetes (Pods, Deployments, Services, Ingress) + Treino Discursivo 5." },
+      { id: "s9d4", day: "Thu 31/12", b1: "Descanso Sensorial Obrigatório", b2: "Véspera de Ano Novo.", isRest: true },
+      { id: "s9d5", day: "Fri 01/01", b1: "Descanso Sensorial Obrigatório", b2: "Ano Novo.", isRest: true },
+      { id: "s9d6", day: "Sat 02/01", b1Target: "RLM_17", b2Target: "DEV_7_5", b1: "RLM: Argumentação e problemas lógicos.", b2: "Espec. 7.5: Infraestrutura como Código (IaC) com Terraform e Ansible." },
+      { id: "s9d7", day: "Sun 03/01", b1Target: "PORT_1", b2Target: "DEV_7_5", b1: "Português: Simulado FGV TJRJ 2026.", b2: "Espec. 7.6: Observabilidade (Zabbix, Prometheus, Grafana, ELK, SRE)." }
     ]
   },
   {
     id: "sem10",
-    title: "SEMANA 10 (31/12/2026 a 06/01/2027) — Segurança da Informação, Criptografia, ICP-Brasil, OAuth2/OIDC/JWT, OWASP Top 10, SAST/DAST/IAST e ISO 27000",
-    dependency: "Tendo estudado APIs (Semana 4) e Contêineres/CI-CD (Semana 9), você aplica a camada de segurança sobre eles: Criptografia e ICP-Brasil sustentam certificados e tokens (SAML, OAuth2, OIDC, JWT), e os pipelines recebem SAST/DAST/IAST e SonarQube para mitigar o OWASP Top 10.",
-    codes: "212091, 212092, 212295, 211798, 207803",
+    title: "SEMANA 10 (04/01 a 10/01/2027) — Segurança, Criptografia, OAuth2/JWT, OWASP Top 10 e ISO 27000",
+    dependency: "Criptografia, tokens de acesso, testes de segurança e normas ISO.",
+    codes: "212091, 212092, 212295, 211798",
     days: [
-      { id: "s10d1", day: "Qui 31/12", b1Target: "RLM_13", b2Target: "DEV_9_1", b1: "RLM: Simulado cronometrado de 10 questões FGV (todas as matérias de RLM).", b2: "Fund. 3.1 e Espec. 9.2: Princípios CID (confidencialidade, integridade, disponibilidade, autenticidade, não repúdio) + Criptografia simétrica e assimétrica (AES, RSA e curvas elípticas), hash, certificados digitais, PKI, ICP-Brasil e assinatura digital (Cód. 212091 e 212092 — Prof. Jósis Alves e Gabriel Pacheco)." },
-      { id: "s10d2", day: "Sex 01/01", b1Target: "PORT_1", b2Target: "FUND_3", b1: "Português: Simulado cronometrado de 10 questões FGV (todas as matérias de Português).", b2: "Fund. 3.2 e 3.3: Gestão de riscos e incidentes, Continuidade de negócios (BIA, DRP, RTO/RPO, ISO 22301) e Normas ABNT NBR ISO/IEC 27001, 27002 e 27005 (Cód. 212091 — 13 aulas já gravadas com Prof. Jósis Alves + Curso ISO 22301 — Prof. Darlan Venturelli)." },
-      { id: "s10d3", day: "Sáb 02/01", b1Target: "RLM_16", b2Target: "DEV_9_1", b1: "RLM: Simulado cronometrado de 10 questões FGV.", b2: "Fund. 3.1 e Espec. 9.3: Segurança de aplicações web e APIs: autenticação, autorização, controle de acesso (RBAC/ABAC, MFA, SSO) e limitação de taxa (rate limiting); protocolos SAML 2.0, OAuth 2.0, OpenID Connect (OIDC) e JWT (Cód. 212091 + 212092 + CGU 211798 — Prof. Jósis Alves)." },
-      { id: "s10d4", day: "Dom 03/01", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s10d5", day: "Seg 04/01", b1Target: "PORT_6", b2Target: "DEV_9_1", b1: "Português: Simulado cronometrado de 10 questões FGV.", b2: "Espec. 9.1: Desenvolvimento seguro: práticas de codificação segura e modelagem de ameaças (STRIDE); DevSecOps; OWASP Top 10: principais riscos de segurança em aplicações web (DPDF Cód. 212295 — Prof. Cleirton Monte + CGU 211798)." },
-      { id: "s10d6", day: "Ter 05/01", b1Target: "RLM_19", b2Target: "DEV_9_4", b1: "RLM: Simulado cronometrado de 10 questões FGV.", b2: "Espec. 9.5: Testes de segurança de aplicações: análise estática (SAST), dinâmica (DAST) e interativa (IAST); análise estática de código com SonarQube + Segurança em contêineres (DATAPREV 207803 + DPE-PB 210973 + TJPB Segurança 212092)." },
-      { id: "s10d7", day: "Qua 06/01", b1Target: "PORT_5_4", b2Target: "DEV_9_1", b1: "Português: Revisão comentada dos erros da semana.", b2: "Revisão Semana 10: Bateria de 25 questões FGV de Criptografia, ICP-Brasil, ISO 27001/27002/27005, SAML/OAuth2/OIDC/JWT, OWASP Top 10 e SAST/DAST/IAST/SonarQube." }
+      { id: "s10d1", day: "Seg 04/01", b1Target: "RLM_13", b2Target: "DEV_9_1", b1: "RLM: Simulado cronometrado de RLM.", b2: "Fund. 3.1 / Espec. 9.2: Princípios CID, Criptografia (AES, RSA, ECC), PKI, ICP-Brasil." },
+      { id: "s10d2", day: "Tue 05/01", b1Target: "PORT_1", b2Target: "FUND_3", b1: "Português: Simulado cronometrado de Português.", b2: "Fund. 3.2/3.3: Gestão de Riscos, DRP, ISO/IEC 27001, 27002 e 27005." },
+      { id: "s10d3", day: "Wed 06/01", b1Target: "RLM_16", b2Target: "DEV_9_1", b1: "RLM: Revisão de equivalências e negações.", b2: "Espec. 9.3: Segurança de APIs, SAML 2.0, OAuth 2.0, OIDC, JWT e Rate Limiting." },
+      { id: "s10d4", day: "Thu 07/01", b1Target: "PORT_6", b2Target: "DEV_9_1", b1: "Português: Reescrita e equivalência.", b2: "Espec. 9.1: Desenvolvimento Seguro, STRIDE e OWASP Top 10 (Cleirton Monte)." },
+      { id: "s10d5", day: "Fri 08/01", b1Target: "RLM_19", b2Target: "DEV_9_4", b1: "RLM: Resolução de problemas lógicos av.", b2: "Espec. 9.5: Testes de segurança (SAST, DAST, IAST) e SonarQube." },
+      { id: "s10d6", day: "Sat 09/01", b1Target: "PORT_5_4", b2Target: "DEV_9_1", b1: "Português: Pontuação avançada + Bateria FGV.", b2: "Revisão geral da Semana 10 (Segurança e Criptografia)." },
+      { id: "s10d7", day: "Sun 10/01", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true }
     ]
   },
   {
     id: "sem11",
-    title: "SEMANA 11 (07/01 a 13/01/2027) — BI/DAMA-DMBOK, PLN, Busca Vetorial, Transformers/LLMs, LangChain/RAG, Segurança em IA, COBIT/ITIL e Discursiva 6",
-    dependency: "Une o topo da cadeia de Dados com o topo da cadeia de Segurança: a partir de bancos de dados e PLN (Tokenização, TF-IDF, Embeddings), você domina Busca Vetorial, Transformers, LLMs, LangChain e RAG, aplicando controles contra Prompt Injection e iniciando Governança (COBIT 2019, ITIL 4 e Contratações TIC).",
+    title: "SEMANA 11 (11/01 a 17/01/2027) — BI, Busca Vetorial, LLMs, RAG, COBIT/ITIL e Contratações",
+    dependency: "Governança de dados, IA Generativa (RAG/LangChain), COBIT/ITIL e Licitações de TI.",
     codes: "212093, 212094, 211798, 212088",
     days: [
-      { id: "s11d1", day: "Qui 07/01", b1Target: "RLM_10", b2Target: "DEV_6_4", b1: "RLM: Resolução da Prova FGV AMAZUL / TJ-SC 2026 (10 questões).", b2: "Fund. 5.1, 5.2 e ⚠️ Espec. 6.7 (Busca Vetorial excluída do 212091!): Governança de dados (DAMA-DMBOK) e Business Intelligence (DW, ETL, OLAP) (212094 + 207803 — Washington Almeida / Patrícia Quintão) + Busca Vetorial: embeddings, similaridade e índice vetorial (Estudar em: CGU 211798 Tóp. 4.2 + TJPB IA 212093 Tóp. 5)." },
-      { id: "s11d2", day: "Sex 08/01", b1Target: "PORT_1", b2Target: "DEV_8_1", b1: "Português: Resolução da Prova FGV AMAZUL / TJ-SC 2026 (10 questões).", b2: "Fund. 5.3 e Domínio 8 (8.1 a 8.3): PLN: pré-processamento (tokenização, stemming, lematização e remoção de stop words) e representação (TF-IDF e word embeddings); Arquitetura Transformer, LLMs e Engenharia de Prompt para desenvolvimento de software (TJPB IA 212093 + SEFAZ-SC — Vitor Kessler e Gunter Amorim)." },
-      { id: "s11d3", day: "Sáb 09/01", b1Target: "RLM_12", b2Target: "DEV_9_4", b1: "RLM: Resolução da Prova FGV MPU / DATAPREV (10 questões).", b2: "Espec. 8.4 e 9.4 + DISCURSIVA 6: Integração com APIs de IA (OpenAI, Hugging Face), LangChain e RAG + Segurança em IA: prompt injection, jailbreak, ataques adversariais, validação/sanitização da saída de LLMs, vazamento de dados/contexto e postura de retenção zero (CGU 211798 + MP-ES Aula 5 — Gunter Amorim) + Treino Discursivo 6." },
-      { id: "s11d4", day: "Dom 10/01", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true },
-      { id: "s11d5", day: "Seg 11/01", b1Target: "PORT_6", b2Target: "FUND_4", b1: "Português: Resolução da Prova FGV MPU / DATAPREV (10 questões).", b2: "Fund. 4.1: Governança e Gestão de TI: COBIT 2019 (conceitos, fatores de design, cascata de metas, domínios EDM/APO/BAI/DSS/MEA) e ITIL 4 (SVS, 4 dimensões, princípios orientadores e práticas de gerenciamento) (TJPB Governança Cód. 212088 — Prof. Darlan Venturelli)." },
-      { id: "s11d6", day: "Ter 12/01", b1Target: "RLM_11", b2Target: "FUND_4", b1: "RLM: Revisão focada em Probabilidade, Combinatória e Estatística FGV.", b2: "Fund. 4.2: Planejamento estratégico (PDTIC, PCA, ENTIC-JUD), gestão de projetos, processos e serviços de TI, indicadores de desempenho e Contratações de soluções de TIC (Lei 14.133/2021, Resolução CNJ nº 468/2022: DOD/DFD, ETP, TR, Matriz de Riscos) (Cód. 212088 — Prof. Darlan Venturelli)." },
-      { id: "s11d7", day: "Qua 13/01", b1Target: "PORT_4", b2Target: "DEV_8_1", b1: "Português: Revisão focada em Reescrita, Semântica e Conectivos FGV.", b2: "Revisão Semana 11: Bateria de 25 questões FGV de BI/DAMA-DMBOK, PLN, Busca Vetorial, LLMs/LangChain/RAG, Segurança em IA, COBIT 2019, ITIL 4 e Contratações de TIC." }
+      { id: "s11d1", day: "Seg 11/01", b1Target: "RLM_10", b2Target: "DEV_6_4", b1: "RLM: Prova FGV AMAZUL / TJ-SC.", b2: "Fund. 5.1/5.2 + ⚠️ Espec. 6.7: DAMA-DMBOK, BI, ETL + Busca Vetorial e Embeddings." },
+      { id: "s11d2", day: "Tue 12/01", b1Target: "PORT_1", b2Target: "DEV_8_1", b1: "Português: Prova FGV AMAZUL / TJ-SC.", b2: "Fund. 5.3 / Domínio 8: PLN, Transformers, LLMs e Engenharia de Prompt." },
+      { id: "s11d3", day: "Wed 13/01", b1Target: "RLM_12", b2Target: "DEV_9_4", b1: "RLM: Estatística e Probabilidade (FGV).", b2: "Espec. 8.4/9.4: LangChain, RAG e Segurança em IA (Prompt Injection, Retenção zero) + Treino Discursivo 6." },
+      { id: "s11d4", day: "Thu 14/01", b1Target: "PORT_6", b2Target: "FUND_4", b1: "Português: Coesão e semântica.", b2: "Fund. 4.1: Governança de TI: COBIT 2019 e ITIL 4 (Darlan Venturelli)." },
+      { id: "s11d5", day: "Fri 15/01", b1Target: "RLM_11", b2Target: "FUND_4", b1: "RLM: Análise combinatória av.", b2: "Fund. 4.2: Planejamento Estratégico (PDTIC) e Contratações de TIC (Lei 14.133, Res. CNJ 468/2022)." },
+      { id: "s11d6", day: "Sat 16/01", b1Target: "PORT_4", b2Target: "DEV_8_1", b1: "Português: Revisão de textos e conectivos.", b2: "Revisão geral da Semana 11 (IA, RAG e Governança)." },
+      { id: "s11d7", day: "Sun 17/01", b1: "Descanso Sensorial Obrigatório", b2: "Livre.", isRest: true }
     ]
   },
   {
     id: "sem12",
-    phase: "FASE 5: Transformação Digital, Regulação do Poder Judiciário (CNJ/TJPB) e Polimento Final (Semana 12 + Véspera)",
-    title: "SEMANA 12 (14/01 a 20/01/2027) — PJe, PDPJ-Br, MNI/MInG, Resoluções CNJ, MoReq-Jus/RDC-Arq, LGPD, Marco Civil e PDTI TJPB",
-    dependency: "Estudar a legislação tecnológica do CNJ e o PDTI do TJPB na Semana 12 garante dois benefícios: você já compreende toda a arquitetura técnica citada nas normas (microsserviços na PDPJ-Br, IA na Res. 615/2025, segurança na Res. 396/2021) e mantém os números das resoluções frescos na memória de curto prazo para o dia 24/01/2027!",
+    phase: "FASE 5: Legislação do Judiciário, Fechamento e Reta Final (Semana 12 + Véspera)",
+    title: "SEMANA 12 (18/01 a 24/01/2027) — PJe, PDPJ-Br, Resoluções CNJ, LGPD, PDTI e Prova",
+    dependency: "Legislação específica do CNJ, PJe, PDPJ-Br, LGPD e reta final para o dia da prova.",
     codes: "212301, 212091, 212088, 212092",
     days: [
-      { id: "s12d1", day: "Qui 14/01", b1Target: "RLM_16", b2Target: "FUND_6", b1: "RLM: Revisão dos 3 tópicos com menor percentual de acerto nas semanas anteriores.", b2: "Fund. 6.1 a 6.3 e Espec. 10.1 e 10.2 (⚠️ PJe excluído do 212091!): Processo Judicial Eletrônico (PJe — Estudar no TRF3 Cód. 212301 ou Prof. Francion Santos) + PDPJ-Br (Res. CNJ 335/2020: arquitetura de microsserviços, marketplace do CNJ e proteção) + Interoperabilidade: MNI (Res. CNJ 91/2009) e MInG (212091 + 212301 — Darlan Venturelli)." },
-      { id: "s12d2", day: "Sex 15/01", b1Target: "PORT_5_5", b2Target: "FUND_7", b1: "Português: Revisão dos 3 tópicos com menor percentual de acerto nas semanas anteriores.", b2: "Fund. 7.1: Normas de TIC no Poder Judiciário: Resolução CNJ nº 370/2021 (ENTIC-JUD), Resolução CNJ nº 396/2021 (ENSEC-PJ) e Resolução CNJ nº 468/2022 (Contratações de TIC) (Aulas já gravadas nos Códs. 212091, 212088 e 212092 — Prof. Darlan Venturelli + TJ-PE)." },
-      { id: "s12d3", day: "Sáb 16/01", b1Target: "RLM_17", b2Target: "FUND_7", b1: "RLM: Bateria rápida de 10 questões FGV de Lógica Proposicional e Argumentação.", b2: "Fund. 7.2 e ⚠️ 7.3 (RDC-Arq excluído do 212091!): Gestão de Processos e Documentos do Poder Judiciário (MoReq-Jus e Resolução CNJ nº 522/2023) (Cód. 212091/212088 — Darlan Venturelli) + Gestão documental arquivística digital: metadados, ciclo de vida, preservação e RDC-Arq (Arquivologia p/ Concursos — Prof. Elvis Miranda e Darlan Eterno + DAMA-DMBOK 212094)." },
-      { id: "s12d4", day: "Dom 17/01", b1: "Descanso Sensorial Obrigatório (Último domingo antes da prova)", b2: "Livre.", isRest: true },
-      { id: "s12d5", day: "Seg 18/01", b1Target: "PORT_1", b2Target: "DEV_10_1", b1: "Português: Bateria rápida de 10 questões FGV de Interpretação e Reescrita.", b2: "Fund. 7.1 e Espec. 10.5: Governança algorítmica (avaliação de impacto algorítmico, transparência, explicabilidade, auditabilidade e supervisão humana) e Normas do CNJ sobre IA no Judiciário: Resolução CNJ nº 615/2025, vedações e limites de uso de IA em atos decisórios (TJPB IA 212093 + TJ-PE + leitura seca da Res. 615/2025)." },
-      { id: "s12d6", day: "Ter 19/01", b1Target: "RLM_12", b2Target: "DEV_10_1", b1: "RLM: Revisão visual das fórmulas-chave (Estatística, Combinatória, Juros e Equivalências).", b2: "Fund. 3.4 e Espec. 10.3 e 10.4: LGPD (Lei nº 13.709/2018: princípios, dados pessoais/sensíveis, bases legais, direitos do titular, controles técnicos, impacto no design e privacidade por padrão) + Marco Civil da Internet (Lei nº 12.965/2014: princípios, guarda de registros de conexão/aplicação e responsabilidade dos provedores) (TRF3 212301 — Maurício Franceschini + CGU 211798 + Direito Digital — Prof.ª Patrícia Quintão / Luciana)." },
-      { id: "s12d7", day: "Qua 20/01", b1Target: "PORT_6_5", b2Target: "FUND_7", b1: "Português: Revisão visual de Crase, Regência, Pontuação e Redação Oficial.", b2: "⚠️ Fund. 7.4 (LACUNA DO 212091!): Plano Diretor de Tecnologia da Informação do TJPB (PDTI 2024–2026): leitura direta e grifada do PDF oficial do PDTI 2024–2026 do TJPB combinada à teoria de PDTIC dos cursos 212088 e CGU 211798 (Tópico 4.4)." }
-    ]
-  },
-  {
-    id: "sem13",
-    title: "RETA FINAL DE VÉSPERA (21/01 a 24/01/2027 — 4 Dias) — Revisão Visual, Desaceleração Sensorial e Dia da Prova",
-    dependency: "Fase exclusiva de consolidação da memória de curto prazo e preservação de energia executiva para as 6 horas de prova no domingo (24/01/2027).",
-    codes: "212091, 211798, 212088",
-    days: [
-      { id: "s13d1", day: "Qui 21/01", b1Target: "RLM_16", b2Target: "DEV_2_4", b1: "Revisão Visual I (Português e RLM): Conectivos, Reescrita, Equivalências Lógicas, Negação de Quantificadores e Fórmulas de Estatística/Combinatória.", b2: "Revisão Visual TI I: Padrões GoF (23 padrões), Princípios SOLID, Clean Architecture, DDD, System Design (CAP, PACELC, Redis, Sharding, Circuit Breaker, NGINX/HAProxy), SQL ANSI e Query Tuning." },
-      { id: "s13d2", day: "Sex 22/01", b1Target: "PORT_6", b2Target: "DEV_8_1", b1: "Revisão Visual II: Leitura rápida dos esqueletos dos 6 treinos discursivos (estrutura em 4 parágrafos respondendo a, b, c, d).", b2: "Revisão Visual TI II: Flutter (Stateless/Stateful, Provider, BLoC, Riverpod, Cubit), Docker/K8s, Terraform, OWASP Top 10, OAuth2/OIDC/SAML/JWT, SAST/DAST/IAST, Transformers/LangChain/RAG, Busca Vetorial e Números das Resoluções CNJ (91, 335, 370, 396, 468, 522, 615) + PDTI TJPB." },
-      { id: "s13d3", day: "Sáb 23/01", b1: "DESACELERAÇÃO SENSORIAL OBRIGATÓRIA (Véspera de Prova)", b2: "Zero estudo pesado. Separar documento de identidade original, comprovante de inscrição/deferimento de tempo adicional (+1h) e sala especial, 3 canetas transparentes (azul ou preta), água e lanche.", isRest: true },
-      { id: "s13d4", day: "Dom 24/01", b1Target: "PORT_1", b2Target: "DEV_1_1", b1: "🎯 DIA DA PROVA TJPB 2026 (Chegada: 11h45 | Portões fecham: 12h30 | Início: 13h00)", b2: "Estratégia nas 6h (com Tempo Adicional): 1º) Rascunho em tópicos da Discursiva (45m) → 2º) 40 Questões Específicas de TI (2h15) → 3º) Passar Discursiva a limpo nas 30 linhas (35m) → 4º) 10 Questões Português + 10 RLM (1h30) → 5º) Cartão-Resposta com calma (30m)." }
+      { id: "s12d1", day: "Seg 18/01", b1Target: "RLM_16", b2Target: "FUND_6", b1: "RLM: Revisão de equivalências lógicas.", b2: "Fund. 6.1-6.3 / Espec. 10.1-10.2: ⚠️ PJe (TRF3 212301), PDPJ-Br (Res. 335/2020) e MNI/MInG." },
+      { id: "s12d2", day: "Tue 19/01", b1Target: "PORT_5_5", b2Target: "FUND_7", b1: "Português: Revisão de concordância e regência.", b2: "Fund. 7.1: Normas de TIC no Poder Judiciário (Resoluções CNJ nº 370/2021, 396/2021, 468/2022)." },
+      { id: "s12d3", day: "Wed 20/01", b1Target: "RLM_17", b2Target: "FUND_7", b1: "RLM: Revisão de argumentação.", b2: "Fund. 7.2-7.4: MoReq-Jus (Res. 522/2023), ⚠️ RDC-Arq (Arquivologia) e ⚠️ PDF do PDTI 2024–2026 do TJPB." },
+      { id: "s12d4", day: "Thu 21/01", b1Target: "PORT_6", b2Target: "DEV_2_4", b1: "Reta Final: Revisão Visual I (Português e RLM).", b2: "Reta Final TI I: GoF, SOLID, Clean Arch, DDD, System Design (CAP, Redis, Circuit Breaker)." },
+      { id: "s12d5", day: "Fri 22/01", b1Target: "PORT_6_5", b2Target: "DEV_8_1", b1: "Reta Final: Leitura rápida dos esqueletos das discursivas.", b2: "Reta Final TI II: Flutter, Docker/K8s, Terraform, OWASP, RAG/Busca Vetorial e Resoluções CNJ." },
+      { id: "s12d6", day: "Sat 23/01", b1: "DESACELERAÇÃO SENSORIAL OBRIGATÓRIA (Véspera de Prova)", b2: "Separar documento original, comprovante de inscrição, tempo adicional, canetas pretas e lanche[cite: 3].", isRest: true },
+      { id: "s12d7", day: "Sun 24/01", b1Target: "PORT_1", b2Target: "DEV_1_1", b1: "🎯 DIA DA PROVA TJPB 2026 (Portões fecham 12h30 | Início 13h00)[cite: 2].", b2: "Estratégia de Prova (com +1h adicional): 1º Rascunho Discursiva → 2º 40 Questões TI → 3º Redação limpa → 4º Português/RLM → 5º Cartão-Resposta[cite: 2, 3]." }
     ]
   }
 ];
