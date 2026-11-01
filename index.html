@@ -20,7 +20,6 @@
       height: 240px;
       max-height: 280px;
     }
-    /* Otimização de performance mobile: renderiza sob demanda durante a rolagem */
     .card-print {
       content-visibility: auto;
       contain-intrinsic-size: 1px 420px;
@@ -34,39 +33,14 @@
       border: 2px solid #0d9488 !important;
       background-color: #f0fdfa !important;
     }
-    /* Estilo otimizado para impressão completa de todas as abas */
     @media print {
-      .no-print {
-        display: none !important;
-      }
-      .print-only-block {
-        display: block !important;
-      }
-      body {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-        font-size: 9pt;
-        padding: 0 !important;
-      }
-      .page-break {
-        page-break-before: always;
-      }
-      .card-print {
-        content-visibility: visible !important;
-        contain-intrinsic-size: auto !important;
-        border: 1px solid #cbd5e1 !important;
-        box-shadow: none !important;
-        background: #ffffff !important;
-        break-inside: avoid;
-        margin-bottom: 12px !important;
-      }
-      table {
-        font-size: 8.5pt !important;
-        width: 100% !important;
-      }
-      th, td {
-        padding: 4px 5px !important;
-      }
+      .no-print { display: none !important; }
+      .print-only-block { display: block !important; }
+      body { background-color: #ffffff !important; color: #000000 !important; font-size: 9pt; padding: 0 !important; }
+      .page-break { page-break-before: always; }
+      .card-print { content-visibility: visible !important; contain-intrinsic-size: auto !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; background: #ffffff !important; break-inside: avoid; margin-bottom: 12px !important; }
+      table { font-size: 8.5pt !important; width: 100% !important; }
+      th, td { padding: 4px 5px !important; }
     }
   </style>
 </head>
@@ -78,14 +52,6 @@
     <span id="toastText">Progresso salvo automaticamente!</span>
   </div>
 
-  <!-- Botão Flutuante de Retorno Rápido (Quando salta da Aba 1 para a Aba 2) -->
-  <div id="returnToScheduleBar" class="fixed bottom-16 md:bottom-6 left-4 z-50 hidden no-print">
-    <button onclick="returnToOriginDay()" class="bg-indigo-950 hover:bg-indigo-900 text-teal-300 font-extrabold text-xs sm:text-sm px-4 py-3 rounded-2xl shadow-2xl border-2 border-teal-400 flex items-center gap-2 cursor-pointer">
-      <span>⬅️</span>
-      <span id="returnToScheduleText">Voltar ao Dia no Cronograma</span>
-    </button>
-  </div>
-
   <!-- Cabeçalho Principal Fixo -->
   <header class="no-print bg-indigo-950 text-white shadow-xl sticky top-0 z-40 border-b border-indigo-800">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
@@ -93,21 +59,20 @@
         <div class="flex items-start sm:items-center justify-between gap-2">
           <div>
             <div class="flex flex-wrap items-center gap-2">
-              <span class="bg-teal-500/20 text-teal-300 border border-teal-400/30 text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Versão 3.0 Modular • Aba 1 ↔ Aba 2 + App Gran</span>
+              <span class="bg-teal-500/20 text-teal-300 border border-teal-400/30 text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Versão 3.0 • TJPB Início 02/11</span>
               <span id="syncStatusBadge" class="bg-indigo-900 text-indigo-200 text-[11px] px-2.5 py-0.5 rounded-full border border-indigo-700 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span id="syncStatusText">Salvo no Aparelho</span>
               </span>
-              <button onclick="toggleGranLinkMode()" id="granModeBtn" class="bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 border border-emerald-500/40 text-[11px] font-bold px-2.5 py-0.5 rounded-full transition cursor-pointer" title="Alternar método de abertura do aplicativo Gran Cursos no celular">
+              <button onclick="toggleGranLinkMode()" id="granModeBtn" class="bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 border border-emerald-500/40 text-[11px] font-bold px-2.5 py-0.5 rounded-full transition cursor-pointer">
                 📲 Modo App: Universal Link (Auto)
               </button>
             </div>
             <h1 class="text-base sm:text-xl font-black tracking-tight mt-1">TJPB 2026 — Analista de TI: Desenvolvimento de Sistemas</h1>
-            <p class="text-[11px] sm:text-xs text-indigo-300">Toque nos tópicos da Aba 1 para abrir as 4 fontes na Aba 2 e toque nos códigos para abrir no App Gran Cursos</p>
+            <p class="text-[11px] sm:text-xs text-indigo-300">Toque em "Ver 4 Fontes Gran" para abrir as alternativas sem sair da Aba 1</p>
           </div>
         </div>
 
-        <!-- Botões de Ação Rápida -->
         <div class="flex flex-wrap items-center gap-2">
           <a href="https://aluno.grancursosonline.com.br/" target="_blank" rel="noopener" onclick="openGranPortal(event)" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold px-3 py-2 rounded-lg shadow-xs transition flex items-center gap-1.5 cursor-pointer">
             <span>🚀</span> Abrir App Gran
@@ -128,7 +93,6 @@
         </div>
       </div>
 
-      <!-- Barra de Progresso Geral em Tempo Real -->
       <div class="mt-3 pt-2.5 border-t border-indigo-900/80 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
         <div class="sm:col-span-7 flex items-center gap-3">
           <div class="w-full bg-indigo-900 rounded-full h-2.5 overflow-hidden p-0.5 border border-indigo-800">
@@ -142,10 +106,9 @@
         </div>
       </div>
 
-      <!-- Navegação de Abas (Desktop/Tablet no Topo) -->
       <nav class="mt-3 flex space-x-1.5 overflow-x-auto pb-1">
         <button onclick="switchTab('tab-cronograma')" id="btn-tab-cronograma" class="tab-btn bg-white text-indigo-950 font-extrabold px-3.5 py-2 rounded-t-lg text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-          <span>📅</span> 1. Cronograma (12 Semanas)
+          <span>📅</span> 1. Cronograma (Início 02/11)
         </button>
         <button onclick="switchTab('tab-fontes')" id="btn-tab-fontes" class="tab-btn bg-indigo-900/70 hover:bg-indigo-800 text-indigo-200 font-semibold px-3.5 py-2 rounded-t-lg text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 cursor-pointer">
           <span>📚</span> 2. Edital + 4 Fontes Gran (100% TJPB)
@@ -157,7 +120,7 @@
     </div>
   </header>
 
-  <!-- Barra de Navegação Inferior Fixa para Celular -->
+  <!-- Barra de Navegação Inferior para Celular -->
   <nav class="no-print md:hidden fixed bottom-0 left-0 right-0 bg-indigo-950 text-white border-t border-indigo-800 z-40 grid grid-cols-3 shadow-2xl">
     <button onclick="switchTab('tab-cronograma')" id="mob-tab-cronograma" class="py-2.5 px-2 flex flex-col items-center justify-center text-[11px] font-bold text-teal-300 border-t-2 border-teal-400">
       <span class="text-base">📅</span>
@@ -176,37 +139,28 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-7xl mx-auto px-3 sm:px-6 py-5 space-y-6">
 
-    <!-- ===================================================================== -->
-    <!-- ABA 1: CRONOGRAMA INTEGRADO POR ORDEM DE DEPENDÊNCIA (SEMANAS 1 A 12) -->
-    <!-- ===================================================================== -->
+    <!-- ABA 1: CRONOGRAMA -->
     <div id="tab-cronograma" class="tab-panel print-only-block space-y-6">
-
-      <!-- Ficha de Identificação + Painel Estratégico do Edital TJPB 2026 -->
       <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 card-print">
         <div class="border-b border-slate-200 pb-4 mb-4 flex flex-col md:flex-row justify-between md:items-center gap-3">
           <div>
-            <span class="inline-block bg-indigo-100 text-indigo-800 text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider mb-1">Edital nº 01/2026 (2ª Retificação Incluída) • Banca FGV</span>
+            <span class="inline-block bg-indigo-100 text-indigo-800 text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider mb-1">Início dos Estudos: 02 de Novembro de 2026 • Prova: 24/01/2027</span>
             <h2 class="text-lg sm:text-2xl font-black text-slate-900">Caderno de Controle — Analista Judiciário (TI: Desenvolvimento de Sistemas)</h2>
           </div>
           <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
             <p><strong>Prova em João Pessoa/PB:</strong> 24/01/2027 (13h às 18h → <strong>19h c/ Tempo Adicional</strong>)</p>
-            <p><strong>Vagas Dev de Sistemas:</strong> 10 imediatas (6 AC + 3 PN + <strong>1 PCD imediata</strong>) + CR (100 discursivas corrigidas)</p>
-            <p><strong>Remuneração Inicial:</strong> <strong>R$ 11.526,14</strong> (R$ 7.526,14 vencimento + R$ 2.200 Alimentação + R$ 1.800 Saúde)</p>
+            <p><strong>Vagas Dev de Sistemas:</strong> 10 imediatas (6 AC + 3 PN + <strong>1 PCD imediata</strong>)[cite: 2]</p>
+            <p><strong>Remuneração Inicial:</strong> <strong>R$ 11.526,14</strong>[cite: 2]</p>
           </div>
         </div>
 
-        <!-- Instrução Rápida de Uso no Celular -->
-        <div class="no-print mb-4 p-3 rounded-xl bg-teal-50 border border-teal-200 text-xs text-teal-950 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <strong>💡 Como usar os links inteligentes neste cronograma:</strong>
-            Toque em <span class="inline-block bg-indigo-100 text-indigo-900 font-bold px-2 py-0.5 rounded">🔗 Ver 4 Fontes na Aba 2</span> para saltar direto para o tópico detalhado no Edital Verticalizado, ou toque em qualquer <span class="inline-block bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded">📲 Cód. 212091</span> para copiar o código e abrir direto no <strong>App do Gran Cursos</strong>.
-          </div>
+        <div class="no-print mb-4 p-3 rounded-xl bg-teal-50 border border-teal-200 text-xs text-teal-950">
+          <strong>💡 Nova facilidade de estudo:</strong> Ao clicar em <span class="inline-block bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded">📚 Ver 4 Fontes Gran (Nesta Tela) ▼</span> em qualquer dia da Aba 1, as alternativas e professores abrem imediatamente abaixo do bloco, sem precisar mudar de aba.
         </div>
 
-        <!-- Campos Editáveis do Candidato -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-5 text-xs">
           <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-            <label class="text-[10px] text-slate-500 font-bold uppercase block">Candidato(a) (Graduação: Teologia)</label>
+            <label class="text-[10px] text-slate-500 font-bold uppercase block">Candidato(a)</label>
             <input type="text" data-save-id="candidate_name" placeholder="Digite seu nome..." class="w-full mt-1 bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 focus:outline-none focus:border-indigo-600">
           </div>
           <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
@@ -214,7 +168,7 @@
             <input type="text" data-save-id="pos1_status" value="Pós em Desenvolvimento de Sistemas (360h)" class="w-full mt-1 bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 focus:outline-none focus:border-indigo-600">
           </div>
           <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-            <label class="text-[10px] text-slate-500 font-bold uppercase block">Pós 2 (Gratuita / AQ e Novos Concursos)</label>
+            <label class="text-[10px] text-slate-500 font-bold uppercase block">Pós 2 (Gratuita / AQ)</label>
             <input type="text" data-save-id="pos2_status" value="Pós em Ciência de Dados e IA / Segurança" class="w-full mt-1 bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 focus:outline-none focus:border-indigo-600">
           </div>
           <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200">
@@ -223,223 +177,131 @@
           </div>
         </div>
 
-        <!-- Gráficos Analíticos -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4 border-t border-slate-100 chart-box">
           <div>
-            <h3 class="text-xs font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">Pesos da Prova TJPB (100 Pontos Totais)</h3>
-            <div class="chart-container">
-              <canvas id="pointsChart"></canvas>
-            </div>
+            <h3 class="text-xs font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">Pesos da Prova TJPB (100 Pontos Totais)[cite: 2]</h3>
+            <div class="chart-container"><canvas id="pointsChart"></canvas></div>
           </div>
           <div>
-            <h3 class="text-xs font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">Semanas de Estudo por Cadeia de Pré-Requisitos</h3>
-            <div class="chart-container">
-              <canvas id="chainsChart"></canvas>
-            </div>
+            <h3 class="text-xs font-bold text-slate-700 mb-2 text-center uppercase tracking-wider">Semanas de Estudo por Cadeia</h3>
+            <div class="chart-container"><canvas id="chainsChart"></canvas></div>
           </div>
         </div>
       </section>
 
-      <!-- Checklist Administrativo Urgente + Alerta das 8 Exclusões do Pacote 212091 -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <section class="bg-amber-50 border border-amber-300 rounded-2xl p-4 sm:p-5 shadow-xs card-print">
-          <h3 class="text-sm sm:text-base font-extrabold text-amber-950 mb-3 flex items-center gap-2">
-            <span>⚠️</span> Checklist Administrativo TJPB (Prazo Final: 18/11/2026 às 16h)
-          </h3>
-          <div class="space-y-2 text-xs text-amber-950">
-            <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
-              <input type="checkbox" data-save-id="chk_admin_1" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
-              <span><strong>1. Inscrição FGV (até 16h de 18/11/2026):</strong> Cargo <em>Analista Judiciário – TI – Desenvolvimento de Sistemas</em> (<a href="https://conhecimento.fgv.br/concursos/tjpb26" target="_blank" class="underline font-bold text-indigo-800">Abrir Portal FGV</a>).</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
-              <input type="checkbox" data-save-id="chk_admin_2" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
-              <span><strong>2. Reserva PCD (Item 6 / Lei 12.764/2012 - TEA):</strong> Enviar laudo médico original em PDF/JPG (máx. 5 MB) com CID expresso e causa até 16h de 18/11/2026.</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
-              <input type="checkbox" data-save-id="chk_admin_3" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
-              <span><strong>3. Tempo Adicional de +1 Hora (Item 9.1.4):</strong> Anexar laudo/parecer com <em>expressa recomendação médica de tempo adicional</em> + Sala com Redução de Estímulos.</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
-              <input type="checkbox" data-save-id="chk_admin_4" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
-              <span><strong>4. Pagamento da GRJ (R$ 120,00):</strong> Pagar boleto até <strong>19/11/2026</strong> (reimpressão disponível só até 16h de 19/11/2026).</span>
-            </label>
-          </div>
-        </section>
+      <!-- Checklist Administrativo -->
+      <section class="bg-amber-50 border border-amber-300 rounded-2xl p-4 sm:p-5 shadow-xs card-print">
+        <h3 class="text-sm font-extrabold text-amber-950 mb-3 flex items-center gap-2">
+          <span>⚠️</span> Checklist Administrativo TJPB (Prazo Final: 18/11/2026 às 16h)[cite: 3]
+        </h3>
+        <div class="space-y-2 text-xs text-amber-950">
+          <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
+            <input type="checkbox" data-save-id="chk_admin_1" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
+            <span><strong>1. Inscrição FGV (até 16h de 18/11/2026):</strong> Cargo <em>Analista Judiciário – TI – Desenvolvimento de Sistemas</em> (<a href="https://conhecimento.fgv.br/concursos/tjpb26" target="_blank" class="underline font-bold text-indigo-800">Portal FGV</a>)[cite: 3].</span>
+          </label>
+          <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
+            <input type="checkbox" data-save-id="chk_admin_2" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
+            <span><strong>2. Reserva PCD (Item 6 / TEA):</strong> Enviar laudo médico original em PDF/JPG (máx. 5 MB) com CID expresso até 16h de 18/11/2026[cite: 3].</span>
+          </label>
+          <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
+            <input type="checkbox" data-save-id="chk_admin_3" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
+            <span><strong>3. Tempo Adicional de +1 Hora (Item 9.1.4):</strong> Anexar laudo com expressa recomendação médica + Sala com Redução de Estímulos.</span>
+          </label>
+          <label class="flex items-start gap-2.5 cursor-pointer bg-white/80 p-2.5 rounded-xl border border-amber-200">
+            <input type="checkbox" data-save-id="chk_admin_4" class="mt-0.5 w-4 h-4 accent-amber-600 rounded">
+            <span><strong>4. Pagamento da GRJ (R$ 120,00):</strong> Pagar boleto até <strong>19/11/2026</strong>[cite: 3].</span>
+          </label>
+        </div>
+      </section>
 
-        <section class="bg-rose-50 border border-rose-300 rounded-2xl p-4 sm:p-5 shadow-xs card-print">
-          <h3 class="text-sm sm:text-base font-extrabold text-rose-950 mb-2 flex items-center gap-2">
-            <span>🚨</span> Auditoria Gran Cursos: 8 Tópicos Excluídos do Curso 212091 (Toque para Ir à Aba 2)
-          </h3>
-          <p class="text-xs text-rose-900 mb-2.5">
-            O pacote principal <strong>212091</strong> declara que <strong>não ministrará</strong> estes 8 itens do edital. Toque em qualquer caixa abaixo para saltar direto para as opções substitutas na <strong>Aba 2</strong>:
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-rose-950">
-            <button onclick="jumpToTab2Topic('FUND_6')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>1. PJe (Fund. 6.2):</strong> Ver no <strong>Cód. 212301</strong> (TRF3) 🔗</button>
-            <button onclick="jumpToTab2Topic('FUND_7')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>2. RDC-Arq (Fund. 7.3):</strong> Ver em <strong>212088</strong> + Arquivologia 🔗</button>
-            <button onclick="jumpToTab2Topic('FUND_7')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>3. PDTI TJPB 24–26 (Fund. 7.4):</strong> Ver em <strong>212088</strong> + PDF 🔗</button>
-            <button onclick="jumpToTab2Topic('DEV_1_3')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>4. SAFe (Espec. 1.4):</strong> Ver no <strong>Cód. 210948</strong> (Aula 1) 🔗</button>
-            <button onclick="jumpToTab2Topic('DEV_1_3')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>5. Lean (Espec. 1.3):</strong> Ver em <strong>PROCERGS / 198499</strong> 🔗</button>
-            <button onclick="jumpToTab2Topic('DEV_6_4')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>6. Query Tuning (Espec. 6.4):</strong> Ver na <strong>CGU 211798 / BD</strong> 🔗</button>
-            <button onclick="jumpToTab2Topic('DEV_6_4')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>7. Busca Vetorial (Espec. 6.7):</strong> Ver em <strong>211798 / 212093</strong> 🔗</button>
-            <button onclick="jumpToTab2Topic('DEV_7_1')" class="text-left bg-white/90 hover:bg-rose-100 p-2 rounded-lg border border-rose-200 transition cursor-pointer"><strong>8. GitOps / Clean Arch & DDD:</strong> Ver em <strong>212092 / 211798</strong> 🔗</button>
-          </div>
-        </section>
-      </div>
-
-      <!-- Container Renderizado Dinamicamente das 12 Semanas + Reta Final -->
+      <!-- Renderização das 13 Semanas -->
       <div id="weeksContainer" class="space-y-6"></div>
-
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- ABA 2: EDITAL VERTICALIZADO COMPLETO + 4 FONTES GRAN POR SUBTÓPICO    -->
-    <!-- ===================================================================== -->
+    <!-- ABA 2: EDITAL VERTICALIZADO + 4 FONTES -->
     <div id="tab-fontes" class="tab-panel hidden print-only-block space-y-6 page-break">
       <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 card-print">
         <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-200 pb-4">
           <div>
-            <span class="bg-teal-100 text-teal-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">Mapeamento Exaustivo • Conectado à Aba 1 e ao App Gran</span>
-            <h2 class="text-lg sm:text-2xl font-black text-slate-900 mt-1">Edital Verticalizado + 4 Opções de Cursos no Gran Cursos (Links Diretos p/ App)</h2>
-            <p class="text-xs text-slate-600">Toque em qualquer botão <span class="bg-emerald-100 text-emerald-900 font-bold px-1.5 py-0.5 rounded">🚀 Abrir no App Gran</span> dentro das 4 opções para copiar o código automaticamente e abrir o pacote diretamente no aplicativo ou navegador.</p>
+            <span class="bg-teal-100 text-teal-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">Mapeamento Exaustivo • 100% TJPB</span>
+            <h2 class="text-lg sm:text-2xl font-black text-slate-900 mt-1">Edital Verticalizado + 4 Opções de Cursos no Gran Cursos</h2>
           </div>
         </div>
-
-        <!-- Barra de Busca e Filtro por Macro-Área -->
         <div class="no-print mt-4 grid grid-cols-1 md:grid-cols-12 gap-3">
           <div class="md:col-span-6 flex gap-2">
-            <input type="text" id="syllabusSearchInput" oninput="filterSyllabus()" placeholder="🔍 Buscar tópico, tecnologia (ex: Flutter, Query Tuning, SAFe, Crase) ou professor..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-indigo-600 font-medium">
-            <button onclick="resetSyllabusFilters()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 rounded-xl shrink-0 cursor-pointer">Limpar</button>
+            <input type="text" id="syllabusSearchInput" oninput="filterSyllabus()" placeholder="🔍 Buscar tópico, tecnologia ou professor..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-indigo-600 font-medium">
+            <button onclick="resetSyllabusFilters()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 rounded-xl cursor-pointer">Limpar</button>
           </div>
           <div class="md:col-span-6 flex flex-wrap gap-1.5 items-center">
             <button onclick="setSyllabusCategory('ALL')" data-cat="ALL" class="cat-filter-btn bg-indigo-900 text-white text-xs font-bold px-3 py-2 rounded-xl cursor-pointer">Todos</button>
             <button onclick="setSyllabusCategory('PORT')" data-cat="PORT" class="cat-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-xl cursor-pointer">Português</button>
             <button onclick="setSyllabusCategory('RLM')" data-cat="RLM" class="cat-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-xl cursor-pointer">RLM</button>
-            <button onclick="setSyllabusCategory('FUND')" data-cat="FUND" class="cat-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-xl cursor-pointer">Fundamentos TI</button>
+            <button onclick="setSyllabusCategory('FUND')" data-cat="FUND" class="cat-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-xl cursor-pointer">Fundamentos</button>
             <button onclick="setSyllabusCategory('DEV')" data-cat="DEV" class="cat-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-xl cursor-pointer">Desenvolvimento</button>
           </div>
         </div>
       </section>
-
-      <!-- Container Dinâmico do Edital Verticalizado com 4 Fontes -->
       <div id="syllabusContainer" class="space-y-6"></div>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- ABA 3: PROVA DISCURSIVA (40 PTS) + CÓDIGOS GRAN + CADERNOS FGV 2026   -->
-    <!-- ===================================================================== -->
+    <!-- ABA 3: DISCURSIVAS + CÓDIGOS -->
     <div id="tab-discursivas" class="tab-panel hidden print-only-block space-y-6 page-break">
-
-      <!-- Estratégia Discursiva FGV (40 pontos / 30 linhas) + 5 Eixos do Edital -->
       <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 card-print">
         <div class="border-b border-slate-200 pb-3 mb-4">
-          <span class="bg-purple-100 text-purple-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">Etapa Eliminatória e Classificatória • 40% da Nota Total</span>
-          <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-1">Estratégia para a Prova Discursiva FGV (Estudo de Caso Técnico — Até 30 Linhas)</h2>
-          <p class="text-xs text-slate-600 mt-1">
-            <strong>Regra de Ouro FGV:</strong> Não escreva introduções filosóficas. Divida as 30 linhas em <strong>parágrafos diretos correspondentes aos comandos a), b), c) e d)</strong> do estudo de caso (6 a 8 linhas por comando).
-          </p>
+          <span class="bg-purple-100 text-purple-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">40% da Nota Total • Estudo de Caso (30 Linhas)[cite: 2]</span>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-1">Estratégia para a Prova Discursiva FGV</h2>
         </div>
-
-        <h3 class="text-xs font-extrabold uppercase tracking-wider text-indigo-900 mb-2.5">Os 5 Eixos Transversais + Cadernos Diretos no App Gran Questões:</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs mb-6">
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <p class="font-bold text-indigo-950">Eixo 1: Arquitetura Judicial e Nuvem</p>
-              <p class="text-slate-600 mt-1">Modernização para microsserviços da <strong>PDPJ-Br (Res. CNJ 335/2020)</strong> com API Gateway, Service Mesh, Kafka/RabbitMQ, OAuth 2.0/OIDC e interoperabilidade via <strong>MNI (Res. 91/2009) e MInG</strong>.</p>
-            </div>
-            <button onclick="jumpToTab2Topic('DEV_10_1')" class="no-print mt-2 text-left text-[11px] font-bold text-indigo-700 hover:underline cursor-pointer">🔗 Ver Fontes na Aba 2 →</button>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <p class="font-bold text-indigo-950">Eixo 2: System Design e Alta Disponibilidade</p>
-              <p class="text-slate-600 mt-1">Trade-offs (<strong>Teorema CAP, PACELC, BASE vs ACID</strong>), cache distribuído em camadas (<strong>Redis</strong>), <em>sharding</em>, balanceamento (<strong>NGINX/HAProxy</strong>) e resiliência (<em>Circuit Breaker / Graceful Degradation</em>).</p>
-            </div>
-            <button onclick="jumpToTab2Topic('DEV_2_4')" class="no-print mt-2 text-left text-[11px] font-bold text-indigo-700 hover:underline cursor-pointer">🔗 Ver Fontes na Aba 2 →</button>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <p class="font-bold text-indigo-950">Eixo 3: IA Generativa e Governança CNJ</p>
-              <p class="text-slate-600 mt-1">Integração com <strong>LLMs (LangChain), RAG e Busca Vetorial (embeddings)</strong>, defesas contra <em>Prompt Injection, Jailbreak</em> e vazamento de contexto, retenção zero e <strong>Resolução CNJ nº 615/2025</strong>.</p>
-            </div>
-            <button onclick="jumpToTab2Topic('DEV_8_1')" class="no-print mt-2 text-left text-[11px] font-bold text-indigo-700 hover:underline cursor-pointer">🔗 Ver Fontes na Aba 2 →</button>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <p class="font-bold text-indigo-950">Eixo 4: DevSecOps, Qualidade e LGPD</p>
-              <p class="text-slate-600 mt-1">Pipelines <strong>CI/CD (Jenkins/GitLab/GitHub Actions) e GitOps</strong> com TDD, <em>Contract/Mutation Testing</em>, <strong>SonarQube, SAST/DAST/IAST</strong>, mitigação do <strong>OWASP Top 10</strong> e <em>Privacy by Design</em> (LGPD).</p>
-            </div>
-            <button onclick="jumpToTab2Topic('DEV_9_1')" class="no-print mt-2 text-left text-[11px] font-bold text-indigo-700 hover:underline cursor-pointer">🔗 Ver Fontes na Aba 2 →</button>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <p class="font-bold text-indigo-950">Eixo 5: Eng. de Software, UI/UX e Contratos</p>
-              <p class="text-slate-600 mt-1">Aplicação de <strong>Scrum, Kanban, Lean e SAFe</strong>, métricas DORA (<strong>MTTR, Lead Time, Deploy Frequency</strong>), contagem <strong>APF/IFPUG</strong> (Res. CNJ 468/2022) e Acessibilidade (<strong>WCAG 2.2 e eMAG</strong>).</p>
-            </div>
-            <button onclick="jumpToTab2Topic('DEV_11_1')" class="no-print mt-2 text-left text-[11px] font-bold text-indigo-700 hover:underline cursor-pointer">🔗 Ver Fontes na Aba 2 →</button>
-          </div>
-          <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 flex flex-col justify-between">
-            <div>
-              <p class="font-bold text-amber-950">🎯 Provas FGV 2025/2026 no App Gran Questões</p>
-              <ul class="mt-1 space-y-1 text-[11px] text-amber-950">
-                <li>• <a href="https://questoes.grancursosonline.com.br/prova/amazul-sp-2026-fgv-analista-de-desenvolvimento-de-sistemas" target="_blank" class="underline font-bold">Abrir Prova FGV AMAZUL Dev 2026</a></li>
-                <li>• <a href="https://questoes.grancursosonline.com.br/provas?bancas=102" target="_blank" class="underline font-bold">Abrir Filtro FGV (TJ-SC, AL-GO, TJRJ, MPU)</a></li>
-              </ul>
-            </div>
-            <button onclick="openGranQuestoesApp(event)" class="no-print mt-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-[11px] px-3 py-1.5 rounded-lg cursor-pointer">🚀 Abrir no App Gran Questões</button>
-          </div>
-        </div>
-
-        <!-- Tabela Interativa dos 6 Treinos de Discursiva -->
-        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-2">Controle dos 6 Simuladinhos Discursivos (Molde Real FGV):</h3>
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 mb-2">Controle dos 6 Simuladinhos Discursivos:</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs">
             <thead>
               <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
                 <th class="p-2.5">Treino / Data</th>
-                <th class="p-2.5">Estudo de Caso e Comandos (a, b, c, d)</th>
-                <th class="p-2.5 w-24 text-center">Linhas (Máx 30)</th>
-                <th class="p-2.5 w-24 text-center">Nota (0-40)</th>
+                <th class="p-2.5">Comandos (a, b, c, d)</th>
+                <th class="p-2.5 w-24 text-center">Linhas</th>
+                <th class="p-2.5 w-24 text-center">Nota (0-40)[cite: 2]</th>
                 <th class="p-2.5 w-20 text-center">Feito</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-200">
               <tr>
-                <td class="p-2.5 font-bold">Discursiva 1<br><span class="text-[11px] text-slate-500 font-normal">Sáb 21/11/26</span></td>
-                <td class="p-2.5"><strong>POO, SOLID, Padrões GoF, JPA e SQL (Molde TJDFT/TCE-TO):</strong> a) Refatorar classe aplicando polimorfismo e DIP; b) Indicar padrão GoF adequado; c) Mapear entidade JPA; d) Escrever consulta SQL com <code>JOIN</code>, <code>GROUP BY</code> e <code>HAVING</code>.</td>
+                <td class="p-2.5 font-bold">Discursiva 1<br><span class="text-[11px] text-slate-500">Sáb 21/11/26</span></td>
+                <td class="p-2.5"><strong>POO, SOLID, GoF, JPA e SQL:</strong> a) Refatorar classe; b) Padrão GoF; c) Entidade JPA; d) Consulta SQL com JOIN/GROUP BY.</td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_1_lines" placeholder="__/30" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_1_score" placeholder="__/40" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="checkbox" data-save-id="disc_1_done" class="disc-check w-5 h-5 accent-indigo-600 rounded"></td>
               </tr>
               <tr>
-                <td class="p-2.5 font-bold">Discursiva 2<br><span class="text-[11px] text-slate-500 font-normal">Sáb 28/11/26</span></td>
-                <td class="p-2.5"><strong>Portal Judicial UI/UX, Responsividade e WCAG 2.2 / eMAG (Molde MPE-ES 2026):</strong> a) Jornadas, personas e wireframes; b) 2 medidas de usabilidade e feedback visual; c) Princípios POUR (WCAG 2.2) e atributos WAI-ARIA/HTML5 semântico; d) Mobile-first e media queries.</td>
+                <td class="p-2.5 font-bold">Discursiva 2<br><span class="text-[11px] text-slate-500">Sáb 28/11/26</span></td>
+                <td class="p-2.5"><strong>UI/UX e WCAG 2.2 / eMAG:</strong> a) Personas/Jornadas; b) Usabilidade; c) Princípios POUR/ARIA; d) Mobile-first.</td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_2_lines" placeholder="__/30" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_2_score" placeholder="__/40" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="checkbox" data-save-id="disc_2_done" class="disc-check w-5 h-5 accent-indigo-600 rounded"></td>
               </tr>
               <tr>
-                <td class="p-2.5 font-bold">Discursiva 3<br><span class="text-[11px] text-slate-500 font-normal">Ter 08/12/26</span></td>
-                <td class="p-2.5"><strong>Banco de Dados: Query Tuning, Índices e Planos de Execução (Molde ALESC 2024 / TJ-RJ):</strong> a) Componentes do otimizador do SGBD; b) Heurísticas de otimização de árvore de consulta; c) Escolha de índices (B-Tree vs Bitmap) e particionamento; d) Uso complementar de NoSQL.</td>
+                <td class="p-2.5 font-bold">Discursiva 3<br><span class="text-[11px] text-slate-500">Ter 08/12/26</span></td>
+                <td class="p-2.5"><strong>Query Tuning & NoSQL:</strong> a) Otimizador SGBD; b) Heurísticas; c) Índices B-Tree/Bitmap; d) NoSQL.</td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_3_lines" placeholder="__/30" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_3_score" placeholder="__/40" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="checkbox" data-save-id="disc_3_done" class="disc-check w-5 h-5 accent-indigo-600 rounded"></td>
               </tr>
               <tr>
-                <td class="p-2.5 font-bold">Discursiva 4<br><span class="text-[11px] text-slate-500 font-normal">Ter 22/12/26</span></td>
-                <td class="p-2.5"><strong>System Design e Arquitetura PDPJ-Br (Res. CNJ 335/2020):</strong> a) Decomposição em microsserviços, API Gateway e Service Mesh; b) Comunicação gRPC vs mensageria Kafka/RabbitMQ; c) Análise CAP/PACELC, Sharding e Cache Redis; d) Circuit Breaker e Graceful Degradation.</td>
+                <td class="p-2.5 font-bold">Discursiva 4<br><span class="text-[11px] text-slate-500">Ter 22/12/26</span></td>
+                <td class="p-2.5"><strong>System Design & PDPJ-Br:</strong> a) Microsserviços/Gateway; b) gRPC vs Kafka; c) CAP/Redis; d) Circuit Breaker.</td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_4_lines" placeholder="__/30" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_4_score" placeholder="__/40" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="checkbox" data-save-id="disc_4_done" class="disc-check w-5 h-5 accent-indigo-600 rounded"></td>
               </tr>
               <tr>
-                <td class="p-2.5 font-bold">Discursiva 5<br><span class="text-[11px] text-slate-500 font-normal">Sáb 26/12/26</span></td>
-                <td class="p-2.5"><strong>DevSecOps, Docker, Kubernetes, Terraform e Observabilidade (Molde DPE-RO FGV):</strong> a) Isolamento em Docker e objetos Kubernetes (Pods, Deployments, Ingress, Secrets); b) Esteira CI/CD e GitOps com SAST/DAST/IAST e SonarQube; c) IaC com Terraform (state); d) Prometheus, Grafana, ELK e APM.</td>
+                <td class="p-2.5 font-bold">Discursiva 5<br><span class="text-[11px] text-slate-500">Sáb 26/12/26</span></td>
+                <td class="p-2.5"><strong>DevOps & K8s:</strong> a) Docker/K8s; b) CI/CD e SonarQube; c) Terraform; d) Prometheus/Grafana.</td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_5_lines" placeholder="__/30" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_5_score" placeholder="__/40" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="checkbox" data-save-id="disc_5_done" class="disc-check w-5 h-5 accent-indigo-600 rounded"></td>
               </tr>
               <tr>
-                <td class="p-2.5 font-bold">Discursiva 6<br><span class="text-[11px] text-slate-500 font-normal">Sáb 09/01/27</span></td>
-                <td class="p-2.5"><strong>IA Generativa, RAG, Busca Vetorial e Res. CNJ 615/2025 (Molde CNU FGV):</strong> a) Pipeline RAG com LangChain, embeddings e índice vetorial; b) Mitigação de Prompt Injection, Jailbreak e sanitização de saída; c) Postura de retenção zero e LGPD; d) Supervisão humana e vedação em atos decisórios (CNJ 615/2025).</td>
+                <td class="p-2.5 font-bold">Discursiva 6<br><span class="text-[11px] text-slate-500">Sáb 09/01/27</span></td>
+                <td class="p-2.5"><strong>IA Generativa & RAG:</strong> a) RAG/LangChain; b) Prompt Injection; c) Retenção zero/LGPD; d) Res. CNJ 615/2025.</td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_6_lines" placeholder="__/30" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="text" data-save-id="disc_6_score" placeholder="__/40" class="w-16 text-center border border-slate-300 rounded px-1.5 py-1"></td>
                 <td class="p-2.5 text-center"><input type="checkbox" data-save-id="disc_6_done" class="disc-check w-5 h-5 accent-indigo-600 rounded"></td>
@@ -449,18 +311,13 @@
         </div>
       </section>
 
-      <!-- Catálogo Rápido de Códigos Gran Cursos (Com Abertura Direta no App) -->
       <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 card-print">
-        <h2 class="text-base sm:text-lg font-black text-slate-900 mb-1">Catálogo de Pacotes do Gran Cursos Online (Abertura Direta no App + Cópia do Código)</h2>
-        <p class="text-xs text-slate-600 mb-4">Ao tocar em <strong>🚀 Abrir no App Gran</strong>, o código do curso é copiado automaticamente para o seu celular e o curso é aberto no aplicativo ou navegador:</p>
+        <h2 class="text-base sm:text-lg font-black text-slate-900 mb-1">Catálogo de Pacotes do Gran Cursos Online</h2>
         <div id="granCodesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs"></div>
       </section>
-
     </div>
-
   </main>
 
-  <!-- Carrega o motor modular que importa dados-cronograma.js e dados-edital.js -->
   <script type="module" src="./app.js"></script>
 </body>
 </html>
