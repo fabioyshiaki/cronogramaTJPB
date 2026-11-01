@@ -1,6 +1,5 @@
 // =========================================================================
-// PARTE 4 DE 4: app.js
-// Motor de Interligação Aba 1 <-> Aba 2, Deep Links App Gran e Persistência
+// app.js — Versão com Expansão de Fontes na Própria Aba 1
 // =========================================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -16,8 +15,6 @@ let db = null;
 let auth = null;
 let currentUser = null;
 let isRemoteUpdating = false;
-let lastOriginDayRowId = null;
-let granAppMode = "UNIVERSAL"; // "UNIVERSAL" ou "INTENT"
 let currentCategoryFilter = "ALL";
 const appId = typeof __app_id !== "undefined" ? __app_id : "tjpb-2026-dev-app";
 
@@ -50,7 +47,6 @@ function copyTextSilent(text) {
   document.body.removeChild(tempInput);
 }
 
-// Transforma códigos numéricos (ex: 212091) em botões clicáveis que abrem a App do Gran Cursos
 function linkifyGranCodesInText(text) {
   if (!text) return "";
   return text.replace(
@@ -61,7 +57,6 @@ function linkifyGranCodesInText(text) {
   );
 }
 
-// Extrai o primeiro código Gran conhecido de uma string de fonte para criar o botão de ação direta na Aba 2
 function extractPrimaryGranCode(text) {
   if (!text) return null;
   const match = text.match(
@@ -83,7 +78,6 @@ function extractPrimaryGranCode(text) {
   return null;
 }
 
-// Abre o curso na App Gran Cursos (Universal Link ou Intent Android) + copia o código automaticamente
 window.openGranCourse = function (codeKey) {
   const targetUrl = GRAN_COURSE_URLS[codeKey] || "https://aluno.grancursosonline.com.br/";
   const isNumericCode = /^\d+$/.test(codeKey);
@@ -97,8 +91,7 @@ window.openGranCourse = function (codeKey) {
   const isAndroid = /Android/i.test(navigator.userAgent);
   if (isAndroid && granAppMode === "INTENT") {
     const cleanUrl = targetUrl.replace(/^https?:\/\//, "");
-    const intentUrl = `intent://${cleanUrl}#Intent;scheme=https;package=br.com.grancursosonline;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end`;
-    window.location.href = intentUrl;
+    window.location.href = `intent://${cleanUrl}#Intent;scheme=https;package=br.com.grancursosonline;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end`;
   } else {
     window.open(targetUrl, "_blank", "noopener");
   }
@@ -107,116 +100,57 @@ window.openGranCourse = function (codeKey) {
 window.openGranPortal = function (event) {
   if (event) event.preventDefault();
   const targetUrl = "https://aluno.grancursosonline.com.br/";
-  const isAndroid = /Android/i.test(navigator.userAgent);
-  if (isAndroid && granAppMode === "INTENT") {
-    window.location.href = `intent://aluno.grancursosonline.com.br/#Intent;scheme=https;package=br.com.grancursosonline;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end`;
-  } else {
-    window.open(targetUrl, "_blank", "noopener");
-  }
+  window.open(targetUrl, "_blank", "noopener");
 };
 
 window.openGranQuestoesApp = function (event) {
   if (event) event.preventDefault();
   const targetUrl = "https://questoes.grancursosonline.com.br/provas?bancas=102";
-  const isAndroid = /Android/i.test(navigator.userAgent);
-  if (isAndroid && granAppMode === "INTENT") {
-    window.location.href = `intent://questoes.grancursosonline.com.br/provas?bancas=102#Intent;scheme=https;package=br.com.grancursosonline.questoes;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end`;
-  } else {
-    window.open(targetUrl, "_blank", "noopener");
-  }
+  window.open(targetUrl, "_blank", "noopener");
 };
 
-window.toggleGranLinkMode = function () {
-  granAppMode = granAppMode === "UNIVERSAL" ? "INTENT" : "UNIVERSAL";
-  const btn = document.getElementById("granModeBtn");
-  if (btn) {
-    btn.textContent =
-      granAppMode === "UNIVERSAL"
-        ? "📲 Modo App: Universal Link (Auto)"
-        : "📲 Modo App: Intent Direto (Android)";
-  }
-  showToast(
-    granAppMode === "UNIVERSAL"
-      ? "Modo Universal Link ativo (iOS/Android/Web)"
-      : "Modo Intent Android ativo (força abertura do App Gran)"
-  );
-};
-
-// Navegação Direta: Salta de um bloco da Aba 1 para o card correspondente na Aba 2
-window.jumpToTab2Topic = function (topicId, originDayRowId = null, originDayLabel = "") {
-  if (originDayRowId) {
-    lastOriginDayRowId = originDayRowId;
-    const returnBar = document.getElementById("returnToScheduleBar");
-    const returnTxt = document.getElementById("returnToScheduleText");
-    if (returnBar && returnTxt) {
-      returnTxt.textContent = `Voltar para ${originDayLabel || "o Cronograma"} (Aba 1)`;
-      returnBar.classList.remove("hidden");
-    }
-  }
-
-  currentCategoryFilter = "ALL";
-  const searchInput = document.getElementById("syllabusSearchInput");
-  if (searchInput) searchInput.value = "";
-  document.querySelectorAll(".cat-filter-btn").forEach((btn) => {
-    if (btn.getAttribute("data-cat") === "ALL") {
-      btn.className = "cat-filter-btn bg-indigo-900 text-white text-xs font-bold px-3 py-2 rounded-xl cursor-pointer";
-    } else {
-      btn.className = "cat-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-xl cursor-pointer";
-    }
-  });
-  renderSyllabus();
-
-  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.add("hidden"));
-  const targetPanel = document.getElementById("tab-fontes");
-  if (targetPanel) targetPanel.classList.remove("hidden");
-  updateTabButtonsUI("tab-fontes");
-
-  setTimeout(() => {
-    document.querySelectorAll(".target-highlight").forEach((el) => el.classList.remove("target-highlight"));
-    const card = document.getElementById("topic-card-" + topicId);
-    if (card) {
-      card.classList.add("target-highlight");
-      card.scrollIntoView({ behavior: "smooth", block: "center" });
-      showToast("Tópico localizado nas 4 Fontes (Aba 2)!");
-    }
-  }, 80);
-};
-
-// Retorna da Aba 2 para a linha exata do dia na Aba 1
-window.returnToOriginDay = function () {
-  window.switchTab("tab-cronograma", false);
-  const returnBar = document.getElementById("returnToScheduleBar");
-  if (returnBar) returnBar.classList.add("hidden");
-
-  if (lastOriginDayRowId) {
-    setTimeout(() => {
-      document.querySelectorAll(".target-highlight").forEach((el) => el.classList.remove("target-highlight"));
-      const row = document.getElementById(lastOriginDayRowId);
-      if (row) {
-        row.classList.add("target-highlight");
-        row.scrollIntoView({ behavior: "smooth", block: "center" });
+// Expande as 4 fontes diretamente na Aba 1 abaixo do bloco de estudo
+window.toggleInPlaceSources = function (sourceBoxId) {
+  const el = document.getElementById(sourceBoxId);
+  if (el) {
+    el.classList.toggle("hidden");
+    if (!el.classList.contains("hidden")) {
+      // Preenche o conteúdo das 4 fontes caso ainda esteja vazio
+      const topicId = el.getAttribute("data-topic-id");
+      const matchTopic = SYLLABUS_DATA.find((s) => s.id === topicId);
+      if (matchTopic && el.innerHTML.trim() === "") {
+        el.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
+            ${renderInlineSourceCard("Opção 1 (Prioritária FGV/TJPB)", "text-indigo-800", "bg-indigo-50/70 border border-indigo-200", matchTopic.f1)}
+            ${renderInlineSourceCard("Opção 2 (Alternativa FGV/Tribunais)", "text-teal-800", "bg-teal-50/70 border border-teal-200", matchTopic.f2)}
+            ${renderInlineSourceCard("Opção 3 (Complementar / Isolado)", "text-slate-700", "bg-slate-50 border border-slate-200", matchTopic.f3)}
+            ${renderInlineSourceCard("Opção 4 (Quarta Fonte / PDF)", "text-amber-900", "bg-amber-50/60 border border-amber-200", matchTopic.f4)}
+          </div>
+        `;
       }
-    }, 80);
+    }
   }
 };
 
-function getScheduledDaysForTopic(topicId) {
-  const matches = [];
-  WEEKS_DATA.forEach((w) => {
-    w.days.forEach((d) => {
-      if (d.b1Target === topicId || d.b2Target === topicId) {
-        matches.push({ rowId: `row_${d.id}`, label: d.day });
-      }
-    });
-  });
-  return matches;
+function renderInlineSourceCard(titleBadge, badgeColorClass, bgClass, textContent) {
+  const linkedText = linkifyGranCodesInText(textContent);
+  const primaryCode = extractPrimaryGranCode(textContent);
+  const actionBtn = primaryCode
+    ? `<button onclick="openGranCourse('${primaryCode}')" class="no-print mt-2 w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-[11px] px-2.5 py-1.5 rounded-lg shadow-2xs transition flex items-center justify-center gap-1 cursor-pointer">
+         <span>🚀</span> Abrir no App Gran ${/^\d+$/.test(primaryCode) ? `(Cód. ${primaryCode})` : ""}
+       </button>`
+    : "";
+
+  return `
+    <div class="p-2.5 rounded-xl ${bgClass} flex flex-col justify-between">
+      <div>
+        <span class="text-[10px] font-black uppercase ${badgeColorClass} block mb-1">${titleBadge}</span>
+        <p class="text-slate-800 leading-relaxed">${linkedText}</p>
+      </div>
+      ${actionBtn}
+    </div>
+  `;
 }
-
-window.jumpBackToDayRow = function (rowId, dayLabel) {
-  lastOriginDayRowId = rowId;
-  window.returnToOriginDay();
-  showToast(`Posicionado em ${dayLabel} no Cronograma!`);
-};
 
 // =========================================================================
 // PERSISTÊNCIA LOCALSTORAGE + FIREBASE
@@ -310,7 +244,7 @@ function updateMetrics() {
 }
 
 // =========================================================================
-// RENDERIZAÇÃO INTERLIGADA (ABA 1 <-> ABA 2 + BOTÕES APP GRAN)
+// RENDERIZAÇÃO DA ABA 1 E ABA 2
 // =========================================================================
 function renderWeeks() {
   const container = document.getElementById("weeksContainer");
@@ -372,28 +306,32 @@ function renderWeeks() {
       } else {
         const b1Html = linkifyGranCodesInText(d.b1);
         const b2Html = linkifyGranCodesInText(d.b2);
+        const boxId1 = `sources_box_${d.id}_b1`;
+        const boxId2 = `sources_box_${d.id}_b2`;
 
-        const b1JumpBtn = d.b1Target
+        const b1Btn = d.b1Target
           ? `<div class="mt-1.5 no-print">
-               <button onclick="jumpToTab2Topic('${d.b1Target}', '${rowId}', '${d.day}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-2 py-0.5 rounded-md transition cursor-pointer">
-                 🔗 Ver 4 Fontes na Aba 2 →
+               <button onclick="toggleInPlaceSources('${boxId1}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-300 px-2.5 py-0.5 rounded-md transition cursor-pointer">
+                 📚 Ver 4 Fontes Gran (Nesta Tela) ▼
                </button>
+               <div id="${boxId1}" data-topic-id="${d.b1Target}" class="hidden mt-2 pt-2 border-t border-teal-100"></div>
              </div>`
           : "";
 
-        const b2JumpBtn = d.b2Target
+        const b2Btn = d.b2Target
           ? `<div class="mt-1.5 no-print">
-               <button onclick="jumpToTab2Topic('${d.b2Target}', '${rowId}', '${d.day}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-300 px-2.5 py-0.5 rounded-md transition cursor-pointer">
-                 🔗 Abrir 4 Fontes Deste Tópico na Aba 2 →
+               <button onclick="toggleInPlaceSources('${boxId2}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-300 px-2.5 py-0.5 rounded-md transition cursor-pointer">
+                 📚 Ver 4 Fontes Gran (Nesta Tela) ▼
                </button>
+               <div id="${boxId2}" data-topic-id="${d.b2Target}" class="hidden mt-2 pt-2 border-t border-teal-100"></div>
              </div>`
           : "";
 
         html += `
           <tr id="${rowId}" class="hover:bg-slate-50/80 transition-colors">
             <td class="p-2.5 text-center font-extrabold text-indigo-950 whitespace-nowrap">${d.day}</td>
-            <td class="p-2.5 align-top leading-relaxed">${b1Html}${b1JumpBtn}</td>
-            <td class="p-2.5 align-top font-medium text-slate-800 leading-relaxed">${b2Html}${b2JumpBtn}</td>
+            <td class="p-2.5 align-top leading-relaxed">${b1Html}${b1Btn}</td>
+            <td class="p-2.5 align-top font-medium text-slate-800 leading-relaxed">${b2Html}${b2Btn}</td>
             <td class="p-2.5 text-center align-middle">
               <div class="inline-flex items-center gap-1 bg-slate-50 border border-slate-300 rounded-lg px-1.5 py-1">
                 <input type="text" data-save-id="${d.id}_hit" data-tot-target="${d.id}_tot" placeholder="0" class="fgv-hit-input w-7 text-center bg-transparent font-bold text-indigo-900 focus:outline-none">
@@ -481,23 +419,6 @@ function renderSyllabus() {
     `;
 
     groups[groupTitle].forEach((item) => {
-      const scheduledDays = getScheduledDaysForTopic(item.id);
-      const scheduleBadges =
-        scheduledDays.length > 0
-          ? `<div class="no-print flex flex-wrap items-center gap-1 mt-1">
-               <span class="text-[10px] font-bold text-slate-500">📅 Dias na Aba 1:</span>
-               ${scheduledDays
-                 .map(
-                   (sd) => `
-                 <button onclick="jumpBackToDayRow('${sd.rowId}', '${sd.label}')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-900 font-bold text-[10px] px-2 py-0.5 rounded-full transition cursor-pointer" title="Voltar para ${sd.label} na Aba 1">
-                   ⬅️ ${sd.label}
-                 </button>
-               `
-                 )
-                 .join("")}
-             </div>`
-          : "";
-
       html += `
         <div id="topic-card-${item.id}" class="p-4 transition-all ${item.isGap ? "bg-rose-50/50" : "hover:bg-slate-50/70"}">
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
@@ -505,7 +426,6 @@ function renderSyllabus() {
               <input type="checkbox" data-save-id="syl_done_${item.id}" class="mt-1 w-4 h-4 accent-indigo-600 rounded shrink-0">
               <div>
                 <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">${item.topic}</h4>
-                ${scheduleBadges}
               </div>
             </div>
             ${item.isGap ? '<span class="bg-rose-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase self-start shrink-0">Lacuna / Em Produção no 212091</span>' : ""}
@@ -561,9 +481,6 @@ function renderGranCodes() {
   ).join("");
 }
 
-// =========================================================================
-// FUNÇÕES DE NAVEGAÇÃO DE ABAS, BUSCA E BACKUP
-// =========================================================================
 function updateTabButtonsUI(tabId) {
   document.querySelectorAll(".tab-btn").forEach((b) => {
     b.className = "tab-btn bg-indigo-900/70 hover:bg-indigo-800 text-indigo-200 font-semibold px-3.5 py-2 rounded-t-lg text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 cursor-pointer";
@@ -589,12 +506,6 @@ window.switchTab = function (tabId, scrollToTop = true) {
   const target = document.getElementById(tabId);
   if (target) target.classList.remove("hidden");
   updateTabButtonsUI(tabId);
-
-  if (tabId === "tab-cronograma") {
-    const returnBar = document.getElementById("returnToScheduleBar");
-    if (returnBar) returnBar.classList.add("hidden");
-  }
-
   if (scrollToTop) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -659,9 +570,6 @@ window.importBackupJSON = function (event) {
   reader.readAsText(file);
 };
 
-// =========================================================================
-// INICIALIZAÇÃO DE GRÁFICOS E CONEXÃO FIREBASE
-// =========================================================================
 async function initFirebaseSync() {
   try {
     if (typeof __firebase_config === "undefined" || !__firebase_config) return;
