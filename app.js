@@ -1,20 +1,21 @@
 // =========================================================================
-// app.js — Versão com Expansão de Fontes na Própria Aba 1
+// app.js — Versão 4.0 (Expansão Interna na Aba 1 com Estratégia + Gran)
 // =========================================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-import { GRAN_COURSE_URLS, GRAN_CODES, WEEKS_DATA } from "./dados-cronograma.js";
+import { GRAN_COURSE_URLS, GRAN_CODES, ESTRATEGIA_MAP, WEEKS_DATA } from "./dados-cronograma.js";
 import { SYLLABUS_DATA } from "./dados-edital.js";
 
-const STORAGE_KEY = "tjpb_2026_v3_progress";
+const STORAGE_KEY = "tjpb_2026_v4_progress";
 let appState = {};
 let db = null;
 let auth = null;
 let currentUser = null;
 let isRemoteUpdating = false;
+let granAppMode = "UNIVERSAL";
 let currentCategoryFilter = "ALL";
 const appId = typeof __app_id !== "undefined" ? __app_id : "tjpb-2026-dev-app";
 
@@ -49,12 +50,19 @@ function copyTextSilent(text) {
 
 function linkifyGranCodesInText(text) {
   if (!text) return "";
-  return text.replace(
-    /\b(212091|212132|212088|212093|212092|212094|207803|207802|207807|207800|198499|210869|211798|211797|211795|210973|212301|212300|212295|198053|210948|194432|202271|180207)\b/g,
-    (match) => {
-      return `<button onclick="openGranCourse('${match}')" class="inline-flex items-center gap-0.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300 font-extrabold px-1.5 py-0.5 rounded-md text-[11px] transition cursor-pointer" title="Copiar código ${match} e abrir no App Gran Cursos">📲 ${match}</button>`;
-    }
-  );
+  return text
+    .replace(/\n/g, "<br>")
+    .replace(
+      /\b(EST_TJPB|EST_TI|EST_MPU|EST_SQ|212091|212132|212088|212093|212092|212094|207803|207802|207807|207800|198499|210869|211798|211797|211795|210973|212301|212300|212295|198053|210948|194432|202271|180207)\b/g,
+      (match) => {
+        const isEst = match.startsWith("EST_");
+        const badgeStyle = isEst
+          ? "bg-amber-100 hover:bg-amber-200 text-amber-950 border-amber-300"
+          : "bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border-emerald-300";
+        const icon = isEst ? "🦉" : "📲";
+        return `<button onclick="openGranCourse('${match}')" class="inline-flex items-center gap-0.5 ${badgeStyle} border font-extrabold px-1.5 py-0.5 rounded-md text-[11px] transition cursor-pointer" title="Abrir ${match}">${icon} ${match}</button>`;
+      }
+    );
 }
 
 function extractPrimaryGranCode(text) {
@@ -63,18 +71,9 @@ function extractPrimaryGranCode(text) {
     /\b(212091|212132|212088|212093|212092|212094|207803|207802|207807|207800|198499|210869|211798|211797|211795|210973|212301|212300|212295|198053|210948|194432|202271|180207)\b/
   );
   if (match) return match[1];
-  if (text.includes("TJPB Banco de Dados") || text.includes("TJPB BD")) return "TJPB_BD";
-  if (text.includes("TJPB Infraestrutura") || text.includes("TJPB Infra")) return "TJPB_INFRA";
-  if (text.includes("Intensiva para FGV") || text.includes("Intensivo FGV")) return "PORT_FGV_MW";
-  if (text.includes("FGV em Exercícios")) return "PORT_FGV_LC";
-  if (text.includes("Edward Melo")) return "REDES_EM";
-  if (text.includes("Cargo A32")) return "MPU_A32";
-  if (text.includes("DPDF - Cargo 3")) return "DPDF_BD";
-  if (text.includes("PROCERGS")) return "PROCERGS";
-  if (text.includes("SEPLAN AP")) return "SEPLAN_AP";
-  if (text.includes("MP ES")) return "MP_ES";
-  if (text.includes("BRDE")) return "BRDE";
-  if (text.includes("Francion Santos")) return "PJE_FS";
+  if (text.includes("Estratégia TJ-PB")) return "EST_TJPB";
+  if (text.includes("Sistema de Questões") || text.includes("Caderno de Reta Final")) return "EST_SQ";
+  if (text.includes("Similar FGV 2026 no Estratégia")) return "EST_TI";
   return null;
 }
 
@@ -83,13 +82,13 @@ window.openGranCourse = function (codeKey) {
   const isNumericCode = /^\d+$/.test(codeKey);
   if (isNumericCode) {
     copyTextSilent(codeKey);
-    showToast(`Código ${codeKey} copiado! Abrindo no Gran Cursos...`);
+    showToast(`Código ${codeKey} copiado! Abrindo curso...`);
   } else {
-    showToast("Abrindo curso no Gran Cursos...");
+    showToast("Abrindo curso na plataforma...");
   }
 
   const isAndroid = /Android/i.test(navigator.userAgent);
-  if (isAndroid && granAppMode === "INTENT") {
+  if (isAndroid && granAppMode === "INTENT" && !codeKey.startsWith("EST_")) {
     const cleanUrl = targetUrl.replace(/^https?:\/\//, "");
     window.location.href = `intent://${cleanUrl}#Intent;scheme=https;package=br.com.grancursosonline;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end`;
   } else {
@@ -99,45 +98,79 @@ window.openGranCourse = function (codeKey) {
 
 window.openGranPortal = function (event) {
   if (event) event.preventDefault();
-  const targetUrl = "https://aluno.grancursosonline.com.br/";
-  window.open(targetUrl, "_blank", "noopener");
+  window.open("https://aluno.grancursosonline.com.br/", "_blank", "noopener");
+};
+
+window.openEstrategiaPortal = function (event) {
+  if (event) event.preventDefault();
+  window.open("https://perfil.estrategia.com/login", "_blank", "noopener");
 };
 
 window.openGranQuestoesApp = function (event) {
   if (event) event.preventDefault();
-  const targetUrl = "https://questoes.grancursosonline.com.br/provas?bancas=102";
-  window.open(targetUrl, "_blank", "noopener");
+  window.open("https://questoes.grancursosonline.com.br/provas?bancas=102", "_blank", "noopener");
 };
 
-// Expande as 4 fontes diretamente na Aba 1 abaixo do bloco de estudo
+window.toggleGranLinkMode = function () {
+  granAppMode = granAppMode === "UNIVERSAL" ? "INTENT" : "UNIVERSAL";
+  const btn = document.getElementById("granModeBtn");
+  if (btn) {
+    btn.textContent =
+      granAppMode === "UNIVERSAL"
+        ? "📲 Modo App: Universal Link (Auto)"
+        : "📲 Modo App: Intent Direto (Android)";
+  }
+  showToast(
+    granAppMode === "UNIVERSAL"
+      ? "Modo Universal Link ativo (iOS/Android/Web)"
+      : "Modo Intent Android ativo"
+  );
+};
+
+// Expande as 6 fontes (2 Estratégia Concursos + 4 Gran Cursos) diretamente na Aba 1 sem mudar de tela
 window.toggleInPlaceSources = function (sourceBoxId) {
   const el = document.getElementById(sourceBoxId);
-  if (el) {
-    el.classList.toggle("hidden");
-    if (!el.classList.contains("hidden")) {
-      // Preenche o conteúdo das 4 fontes caso ainda esteja vazio
-      const topicId = el.getAttribute("data-topic-id");
-      const matchTopic = SYLLABUS_DATA.find((s) => s.id === topicId);
-      if (matchTopic && el.innerHTML.trim() === "") {
-        el.innerHTML = `
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
-            ${renderInlineSourceCard("Opção 1 (Prioritária FGV/TJPB)", "text-indigo-800", "bg-indigo-50/70 border border-indigo-200", matchTopic.f1)}
-            ${renderInlineSourceCard("Opção 2 (Alternativa FGV/Tribunais)", "text-teal-800", "bg-teal-50/70 border border-teal-200", matchTopic.f2)}
-            ${renderInlineSourceCard("Opção 3 (Complementar / Isolado)", "text-slate-700", "bg-slate-50 border border-slate-200", matchTopic.f3)}
-            ${renderInlineSourceCard("Opção 4 (Quarta Fonte / PDF)", "text-amber-900", "bg-amber-50/60 border border-amber-200", matchTopic.f4)}
+  if (!el) return;
+  el.classList.toggle("hidden");
+  if (!el.classList.contains("hidden") && el.innerHTML.trim() === "") {
+    const topicId = el.getAttribute("data-topic-id");
+    const matchTopic = SYLLABUS_DATA.find((s) => s.id === topicId);
+    const estData = ESTRATEGIA_MAP[topicId] || {
+      e1: "Estratégia TJ-PB 2026 (Pós-Edital): Pacote Completo Analista Judiciário - Desenvolvimento de Sistemas (LDI + PDF + Videoaulas).",
+      e2: "Similar FGV 2026 no Estratégia: Pacotes DATAPREV 2026, TJ-RJ 2026 e MPU (FGV) + Passo Estratégico."
+    };
+
+    if (matchTopic) {
+      el.innerHTML = `
+        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+          <div class="text-[11px] font-extrabold text-indigo-950 border-b border-slate-200 pb-1">
+            📖 Tópico no Edital Verticalizado: <span class="text-teal-800">${matchTopic.topic}</span>
           </div>
-        `;
-      }
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+            ${renderInlineSourceCard("🦉 Estratégia 1 (TJ-PB 2026 Pós-Edital / LDI)", "text-amber-950", "bg-amber-50/90 border border-amber-300", estData.e1, "EST_TJPB")}
+            ${renderInlineSourceCard("🦉 Estratégia 2 (Similar FGV 2026 / Passo Estratégico)", "text-amber-900", "bg-amber-50/50 border border-amber-200", estData.e2, "EST_TI")}
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-xs pt-1">
+            ${renderInlineSourceCard("🎯 Gran 1 (Prioritária FGV/TJPB)", "text-indigo-800", "bg-indigo-50/70 border border-indigo-200", matchTopic.f1)}
+            ${renderInlineSourceCard("🎯 Gran 2 (Alternativa FGV/Tribunais)", "text-teal-800", "bg-teal-50/70 border border-teal-200", matchTopic.f2)}
+            ${renderInlineSourceCard("🎯 Gran 3 (Complementar / Isolado)", "text-slate-700", "bg-white border border-slate-200", matchTopic.f3)}
+            ${renderInlineSourceCard("🎯 Gran 4 (Quarta Fonte / PDF)", "text-slate-700", "bg-white border border-slate-200", matchTopic.f4)}
+          </div>
+        </div>
+      `;
     }
   }
 };
 
-function renderInlineSourceCard(titleBadge, badgeColorClass, bgClass, textContent) {
+function renderInlineSourceCard(titleBadge, badgeColorClass, bgClass, textContent, forcedCode = null) {
   const linkedText = linkifyGranCodesInText(textContent);
-  const primaryCode = extractPrimaryGranCode(textContent);
+  const primaryCode = forcedCode || extractPrimaryGranCode(textContent);
+  const isEst = primaryCode && primaryCode.startsWith("EST_");
   const actionBtn = primaryCode
-    ? `<button onclick="openGranCourse('${primaryCode}')" class="no-print mt-2 w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-[11px] px-2.5 py-1.5 rounded-lg shadow-2xs transition flex items-center justify-center gap-1 cursor-pointer">
-         <span>🚀</span> Abrir no App Gran ${/^\d+$/.test(primaryCode) ? `(Cód. ${primaryCode})` : ""}
+    ? `<button onclick="openGranCourse('${primaryCode}')" class="no-print mt-2 w-full ${
+        isEst ? "bg-amber-600 hover:bg-amber-500" : "bg-emerald-600 hover:bg-emerald-500"
+      } text-white font-extrabold text-[11px] px-2.5 py-1.5 rounded-lg shadow-2xs transition flex items-center justify-center gap-1 cursor-pointer">
+         <span>${isEst ? "🦉" : "🚀"}</span> Abrir no ${isEst ? "Estratégia Concursos" : `App Gran ${/^\d+$/.test(primaryCode) ? `(Cód. ${primaryCode})` : ""}`}
        </button>`
     : "";
 
@@ -157,7 +190,10 @@ function renderInlineSourceCard(titleBadge, badgeColorClass, bgClass, textConten
 // =========================================================================
 function loadFromLocalStorage() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem("tjpb_2026_v2_progress");
+    const raw =
+      localStorage.getItem(STORAGE_KEY) ||
+      localStorage.getItem("tjpb_2026_v3_progress") ||
+      localStorage.getItem("tjpb_2026_v2_progress");
     if (raw) {
       appState = JSON.parse(raw);
     }
@@ -177,7 +213,7 @@ function saveToLocalStorage() {
 async function saveToCloud() {
   if (!db || !currentUser || isRemoteUpdating) return;
   try {
-    const docRef = doc(db, "artifacts", appId, "users", currentUser.uid, "study_progress", "tjpb_v3");
+    const docRef = doc(db, "artifacts", appId, "users", currentUser.uid, "study_progress", "tjpb_v4");
     await setDoc(docRef, { state: JSON.stringify(appState), updatedAt: Date.now() }, { merge: true });
     const badgeText = document.getElementById("syncStatusText");
     if (badgeText) badgeText.textContent = "Sincronizado na Nuvem";
@@ -244,7 +280,7 @@ function updateMetrics() {
 }
 
 // =========================================================================
-// RENDERIZAÇÃO DA ABA 1 E ABA 2
+// RENDERIZAÇÃO DA ABA 1 (SEMANAS 1 A 10) E ABA 2 (EDITAL + ESTRATÉGIA + GRAN)
 // =========================================================================
 function renderWeeks() {
   const container = document.getElementById("weeksContainer");
@@ -270,16 +306,16 @@ function renderWeeks() {
             <p class="text-[11px] text-indigo-200 mt-0.5"><strong>Pré-Requisito / Ordem Lógica:</strong> ${week.dependency}</p>
           </div>
           <div class="text-[11px] bg-indigo-950/90 border border-indigo-700 px-2.5 py-1.5 rounded-xl font-semibold flex flex-wrap items-center gap-1 self-start sm:self-center shrink-0">
-            <span class="text-indigo-200 mr-1">Pacotes:</span> ${headerCodesLinked}
+            <span class="text-indigo-200 mr-1">Atalhos:</span> ${headerCodesLinked}
           </div>
         </div>
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs">
             <thead>
               <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
-                <th class="p-2.5 w-20 text-center">Dia</th>
-                <th class="p-2.5 w-1/3">Bloco 1: Básica (45–60m)</th>
-                <th class="p-2.5">Bloco 2: Específica de TI em Hiperfoco (2h–2h30)</th>
+                <th class="p-2.5 w-24 text-center">Dia</th>
+                <th class="p-2.5 w-1/3">Bloco 1: Básica (Nome no Edital + Fontes)</th>
+                <th class="p-2.5">Bloco 2: Específica de TI (Nome no Edital + Fontes)</th>
                 <th class="p-2.5 w-28 text-center">Acertos FGV</th>
                 <th class="p-2.5 w-36 text-center">Check Diário</th>
               </tr>
@@ -310,18 +346,18 @@ function renderWeeks() {
         const boxId2 = `sources_box_${d.id}_b2`;
 
         const b1Btn = d.b1Target
-          ? `<div class="mt-1.5 no-print">
-               <button onclick="toggleInPlaceSources('${boxId1}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-300 px-2.5 py-0.5 rounded-md transition cursor-pointer">
-                 📚 Ver 4 Fontes Gran (Nesta Tela) ▼
+          ? `<div class="mt-2 no-print">
+               <button onclick="toggleInPlaceSources('${boxId1}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-indigo-900 bg-indigo-50 hover:bg-indigo-100 border border-indigo-300 px-2.5 py-1 rounded-lg transition cursor-pointer">
+                 📚 Ver Fontes Estratégia + Gran (Nesta Tela) ▼
                </button>
-               <div id="${boxId1}" data-topic-id="${d.b1Target}" class="hidden mt-2 pt-2 border-t border-teal-100"></div>
+               <div id="${boxId1}" data-topic-id="${d.b1Target}" class="hidden mt-2 pt-2 border-t border-indigo-100"></div>
              </div>`
           : "";
 
         const b2Btn = d.b2Target
-          ? `<div class="mt-1.5 no-print">
-               <button onclick="toggleInPlaceSources('${boxId2}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-300 px-2.5 py-0.5 rounded-md transition cursor-pointer">
-                 📚 Ver 4 Fontes Gran (Nesta Tela) ▼
+          ? `<div class="mt-2 no-print">
+               <button onclick="toggleInPlaceSources('${boxId2}')" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-900 bg-teal-50 hover:bg-teal-100 border border-teal-300 px-2.5 py-1 rounded-lg transition cursor-pointer">
+                 📚 Ver Fontes Estratégia + Gran (Nesta Tela) ▼
                </button>
                <div id="${boxId2}" data-topic-id="${d.b2Target}" class="hidden mt-2 pt-2 border-t border-teal-100"></div>
              </div>`
@@ -342,7 +378,7 @@ function renderWeeks() {
             <td class="p-2.5 align-middle">
               <div class="flex flex-col gap-1 text-[11px]">
                 <label class="inline-flex items-center gap-1.5 cursor-pointer">
-                  <input type="checkbox" data-save-id="${d.id}_teo" class="w-3.5 h-3.5 accent-indigo-600 rounded"> <span>Vídeo/PDF</span>
+                  <input type="checkbox" data-save-id="${d.id}_teo" class="w-3.5 h-3.5 accent-indigo-600 rounded"> <span>LDI/PDF/Vídeo</span>
                 </label>
                 <label class="inline-flex items-center gap-1.5 cursor-pointer">
                   <input type="checkbox" data-save-id="${d.id}_qst" class="w-3.5 h-3.5 accent-teal-600 rounded"> <span>Questões FGV</span>
@@ -359,34 +395,14 @@ function renderWeeks() {
           </table>
         </div>
         <div class="p-3 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center gap-2 text-xs">
-          <span class="font-bold text-slate-600 whitespace-nowrap">📝 Caderno de Erros / Dúvidas (${week.id.toUpperCase()}):</span>
-          <input type="text" data-save-id="${week.id}_notes" placeholder="Anote os subtópicos para revisar ou aulas pendentes..." class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-indigo-600">
+          <span class="font-bold text-slate-600 whitespace-nowrap">📝 Caderno de Erros / Passo Estratégico (${week.id.toUpperCase()}):</span>
+          <input type="text" data-save-id="${week.id}_notes" placeholder="Anote os subtópicos para revisar no Passo Estratégico ou aulas pendentes..." class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-indigo-600">
         </div>
       </section>
     `;
   });
 
   container.innerHTML = html;
-}
-
-function renderSourceCardOption(titleBadge, badgeColorClass, bgClass, textContent) {
-  const linkedText = linkifyGranCodesInText(textContent);
-  const primaryCode = extractPrimaryGranCode(textContent);
-  const actionBtn = primaryCode
-    ? `<button onclick="openGranCourse('${primaryCode}')" class="no-print mt-2 w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-[11px] px-2.5 py-1.5 rounded-lg shadow-2xs transition flex items-center justify-center gap-1 cursor-pointer">
-         <span>🚀</span> Abrir no App Gran ${/^\d+$/.test(primaryCode) ? `(Cód. ${primaryCode})` : ""}
-       </button>`
-    : "";
-
-  return `
-    <div class="p-2.5 rounded-xl ${bgClass} flex flex-col justify-between">
-      <div>
-        <span class="text-[10px] font-black uppercase ${badgeColorClass} block mb-1">${titleBadge}</span>
-        <p class="text-slate-800 leading-relaxed">${linkedText}</p>
-      </div>
-      ${actionBtn}
-    </div>
-  `;
 }
 
 function renderSyllabus() {
@@ -398,7 +414,8 @@ function renderSyllabus() {
     const matchCat = currentCategoryFilter === "ALL" || item.cat === currentCategoryFilter;
     if (!matchCat) return false;
     if (!query) return true;
-    const fullText = `${item.id} ${item.catTitle} ${item.topic} ${item.f1} ${item.f2} ${item.f3} ${item.f4}`.toLowerCase();
+    const est = ESTRATEGIA_MAP[item.id] || { e1: "", e2: "" };
+    const fullText = `${item.id} ${item.catTitle} ${item.topic} ${est.e1} ${est.e2} ${item.f1} ${item.f2} ${item.f3} ${item.f4}`.toLowerCase();
     return fullText.includes(query);
   });
 
@@ -419,8 +436,13 @@ function renderSyllabus() {
     `;
 
     groups[groupTitle].forEach((item) => {
+      const estData = ESTRATEGIA_MAP[item.id] || {
+        e1: "Estratégia TJ-PB 2026 (Pós-Edital): Pacote Completo Analista Judiciário - Desenvolvimento de Sistemas.",
+        e2: "Similar FGV 2026 no Estratégia: Pacotes DATAPREV 2026, TJ-RJ 2026 e MPU (FGV)."
+      };
+
       html += `
-        <div id="topic-card-${item.id}" class="p-4 transition-all ${item.isGap ? "bg-rose-50/50" : "hover:bg-slate-50/70"}">
+        <div id="topic-card-${item.id}" class="p-4 transition-all ${item.isGap ? "bg-rose-50/40" : "hover:bg-slate-50/70"}">
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
             <div class="flex items-start gap-2.5">
               <input type="checkbox" data-save-id="syl_done_${item.id}" class="mt-1 w-4 h-4 accent-indigo-600 rounded shrink-0">
@@ -428,13 +450,17 @@ function renderSyllabus() {
                 <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">${item.topic}</h4>
               </div>
             </div>
-            ${item.isGap ? '<span class="bg-rose-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase self-start shrink-0">Lacuna / Em Produção no 212091</span>' : ""}
+            ${item.isGap ? '<span class="bg-amber-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase self-start shrink-0">Coberto no Estratégia TJ-PB + Pacotes Alternativos Gran</span>' : ""}
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs mb-2.5">
+            ${renderInlineSourceCard("🦉 Estratégia 1 (Prioritária: TJ-PB 2026 Pós-Edital / LDI)", "text-amber-950", "bg-amber-50/90 border border-amber-300", estData.e1, "EST_TJPB")}
+            ${renderInlineSourceCard("🦉 Estratégia 2 (Similar FGV 2026 / Passo Estratégico)", "text-amber-900", "bg-amber-50/50 border border-amber-200", estData.e2, "EST_TI")}
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
-            ${renderSourceCardOption("Opção 1 (Prioritária FGV/TJPB)", "text-indigo-800", "bg-indigo-50/70 border border-indigo-200", item.f1)}
-            ${renderSourceCardOption("Opção 2 (Alternativa FGV/Tribunais)", "text-teal-800", "bg-teal-50/70 border border-teal-200", item.f2)}
-            ${renderSourceCardOption("Opção 3 (Complementar / Isolado)", "text-slate-700", "bg-slate-50 border border-slate-200", item.f3)}
-            ${renderSourceCardOption("Opção 4 (Quarta Fonte / PDF)", "text-amber-900", "bg-amber-50/60 border border-amber-200", item.f4)}
+            ${renderInlineSourceCard("🎯 Gran 1 (Prioritária FGV/TJPB)", "text-indigo-800", "bg-indigo-50/70 border border-indigo-200", item.f1)}
+            ${renderInlineSourceCard("🎯 Gran 2 (Alternativa FGV/Tribunais)", "text-teal-800", "bg-teal-50/70 border border-teal-200", item.f2)}
+            ${renderInlineSourceCard("🎯 Gran 3 (Complementar / Isolado)", "text-slate-700", "bg-slate-50 border border-slate-200", item.f3)}
+            ${renderInlineSourceCard("🎯 Gran 4 (Quarta Fonte / PDF)", "text-slate-700", "bg-slate-50 border border-slate-200", item.f4)}
           </div>
         </div>
       `;
@@ -457,28 +483,26 @@ function renderSyllabus() {
 function renderGranCodes() {
   const grid = document.getElementById("granCodesGrid");
   if (!grid) return;
-  grid.innerHTML = GRAN_CODES.map(
-    (c) => `
-    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between gap-2">
-      <div>
-        <div class="flex items-center justify-between gap-2">
-          <span class="bg-indigo-900 text-teal-300 font-black px-2.5 py-0.5 rounded-lg text-xs">Cód. ${c.code}</span>
-          <span class="text-[11px] font-bold text-slate-500">${c.focus}</span>
+  grid.innerHTML = GRAN_CODES.map((c) => {
+    const isEst = c.code.startsWith("EST_");
+    return `
+      <div class="p-3.5 rounded-xl ${isEst ? "bg-amber-50/70 border-amber-300" : "bg-slate-50 border-slate-200"} border flex flex-col justify-between gap-2">
+        <div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="${isEst ? "bg-amber-900 text-amber-200" : "bg-indigo-900 text-teal-300"} font-black px-2.5 py-0.5 rounded-lg text-xs">${c.code}</span>
+            <span class="text-[11px] font-bold text-slate-500">${c.focus}</span>
+          </div>
+          <p class="font-extrabold text-slate-900 mt-1.5">${c.name}</p>
+          <p class="text-slate-600 text-[11px] mt-1">${c.role}</p>
         </div>
-        <p class="font-extrabold text-slate-900 mt-1.5">${c.name}</p>
-        <p class="text-slate-600 text-[11px] mt-1">${c.role}</p>
+        <div class="no-print mt-2 flex flex-wrap gap-2">
+          <button onclick="openGranCourse('${c.code}')" class="${isEst ? "bg-amber-600 hover:bg-amber-500" : "bg-emerald-600 hover:bg-emerald-500"} text-white font-extrabold text-[11px] px-3 py-1.5 rounded-lg transition cursor-pointer flex items-center gap-1">
+            <span>${isEst ? "🦉" : "🚀"}</span> Abrir ${isEst ? "no Estratégia" : `no App Gran (${c.code})`}
+          </button>
+        </div>
       </div>
-      <div class="no-print mt-2 flex flex-wrap gap-2">
-        <button onclick="openGranCourse('${c.code}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-[11px] px-3 py-1.5 rounded-lg transition cursor-pointer flex items-center gap-1">
-          <span>🚀</span> Abrir no App Gran (${c.code})
-        </button>
-        <button onclick="copyGranCode('${c.code}')" class="bg-white hover:bg-indigo-50 text-indigo-800 border border-indigo-200 font-bold text-[11px] px-3 py-1.5 rounded-lg transition cursor-pointer">
-          📋 Só Copiar Código
-        </button>
-      </div>
-    </div>
-  `
-  ).join("");
+    `;
+  }).join("");
 }
 
 function updateTabButtonsUI(tabId) {
@@ -535,14 +559,14 @@ window.setSyllabusCategory = function (cat) {
 
 window.copyGranCode = function (code) {
   copyTextSilent(code);
-  showToast(`Código ${code} copiado para a área de transferência!`);
+  showToast(`Código ${code} copiado!`);
 };
 
 window.exportBackupJSON = function () {
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
   const dlAnchor = document.createElement("a");
   dlAnchor.setAttribute("href", dataStr);
-  dlAnchor.setAttribute("download", "backup_cronograma_tjpb_2026_v3.json");
+  dlAnchor.setAttribute("download", "backup_cronograma_tjpb_2026_v4.json");
   document.body.appendChild(dlAnchor);
   dlAnchor.click();
   dlAnchor.remove();
@@ -587,7 +611,7 @@ async function initFirebaseSync() {
     onAuthStateChanged(auth, (user) => {
       currentUser = user;
       if (!user) return;
-      const docRef = doc(db, "artifacts", appId, "users", user.uid, "study_progress", "tjpb_v3");
+      const docRef = doc(db, "artifacts", appId, "users", user.uid, "study_progress", "tjpb_v4");
       onSnapshot(
         docRef,
         (snap) => {
@@ -666,8 +690,8 @@ function initCharts() {
         ],
         datasets: [
           {
-            label: "Semanas com Foco Direto",
-            data: [12, 12, 4, 3, 3, 4],
+            label: "Semanas de Estudo (Plano 10 Semanas)",
+            data: [10, 10, 3, 2, 2, 3],
             backgroundColor: "#4f46e5",
             borderRadius: 6
           }
